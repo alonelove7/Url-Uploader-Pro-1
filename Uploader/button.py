@@ -278,8 +278,7 @@ async def youtube_dl_call_back(bot, update):
             asyncio.create_task(clendir(thumbnail))
             await update.message.edit_caption(
             caption="Uploaded sucessfully ✓\n\nJOIN : @Tellybots",
-            parse_mode=enums.ParseMode.HTML,
-            disable_web_page_preview=True)
+            parse_mode=enums.ParseMode.HTML)
 
 #=================================
 
