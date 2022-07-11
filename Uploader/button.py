@@ -265,21 +265,26 @@ async def youtube_dl_call_back(bot, update):
                     progress_args=(
                         Translation.UPLOAD_START,
                         update.message,
-                        start_time
-                    )
-                )
-            else:
-                logger.info("Did this happen? :\\")
-            end_two = datetime.now()
-            time_taken_for_upload = (end_two - end_one).seconds
-            try:
-                shutil.rmtree(tmp_directory_for_each_user)
-                os.remove(thumb_image_path)
-            except:
-                pass
+                        start_time))
+
+            asyncio.create_task(clendir(tmp_directory_for_each_user))
+            asyncio.create_task(clendir(thumbnail))
             await update.message.edit_caption(
-                caption=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload),
-                parse_mode=enums.ParseMode.HTML
-            )
+            caption="Uploaded sucessfully ✓\n\nJOIN : @Tellybots",
+            parse_mode=enums.ParseMode.HTML,
+            disable_web_page_preview=True)
 
+#=================================
 
+async def clendir(directory):
+
+    try:
+        shutil.rmtree(directory)
+    except:
+        pass
+    try:
+        os.remove(directory)
+    except:
+        pass
+
+#=================================
