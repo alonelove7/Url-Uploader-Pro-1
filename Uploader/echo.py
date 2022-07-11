@@ -103,7 +103,7 @@ async def echo(bot, update):
             "yt-dlp",
             "--no-warnings",
             "--cookies", "cookies.txt",
-            "--geo-bypass-country", Config.BYPASS,
+            
             "--youtube-skip-hls-manifest",
             "-j",
             url,
@@ -114,7 +114,7 @@ async def echo(bot, update):
             "yt-dlp",
             "--no-warnings",
             "--cookies", "cookies.txt",
-            "--geo-bypass-country", Config.BYPASS,
+            
             "--youtube-skip-hls-manifest",
             "-j",
             url
@@ -122,9 +122,9 @@ async def echo(bot, update):
     if youtube_dl_username is not None:
         command_to_exec.append("--username")
         command_to_exec.append(youtube_dl_username)
-    if Config.BYPASS != "":
+    if "hotstar" in url:
         command_to_exec.append("--geo-bypass-country")
-        command_to_exec.append(Config.BYPASS)
+        command_to_exec.append("IN")
     if youtube_dl_password is not None:
         command_to_exec.append("--password")
         command_to_exec.append(youtube_dl_password)
