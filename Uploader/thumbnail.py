@@ -12,14 +12,14 @@ from PIL import Image
 import time
 
 # the Strings used for this "thing"
-from plugins.script import Translation
+from Uploader.script import Translation
 from pyrogram import Client
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 from pyrogram import filters
-from plugins.functions.help_Nekmo_ffmpeg import take_screen_shot
+from Uploader.functions.help_Nekmo_ffmpeg import take_screen_shot
 import psutil
 import shutil
 import string
