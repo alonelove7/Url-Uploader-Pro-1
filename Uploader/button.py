@@ -89,10 +89,9 @@ async def youtube_dl_call_back(bot, update):
     logger.info(youtube_dl_url)
     logger.info(custom_file_name)
     
-    await bot.edit_message_text(
-        text=Translation.DOWNLOAD_START.format(custom_file_name),
-        chat_id=update.message.chat.id,
-        message_id=update.id
+    await update.message.edit_caption(
+        caption=Translation.DOWNLOAD_START.format(custom_file_name),
+        parse_mode=enums.ParseMode.HTML
     )
 
     tmp_directory_for_each_user = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + f'{ranom}'
@@ -160,10 +159,10 @@ async def youtube_dl_call_back(bot, update):
     ad_string_to_replace = "please report this issue on https://yt-dl.org/bug . Make sure you are using the latest version; see  https://yt-dl.org/update  on how to update. Be sure to call youtube-dl with the --verbose flag and include its complete output."
     if e_response and ad_string_to_replace in e_response:
         error_message = e_response.replace(ad_string_to_replace, "")
-        await bot.edit_message_text(
-            chat_id=update.message.chat.id,
-            message_id=update.id,
-            text=error_message
+        await update.message.edit_caption(
+            
+            caption=error_message,
+            parse_mode=enums.ParseMode.HTML
         )
         return False
     if t_response:
@@ -179,16 +178,15 @@ async def youtube_dl_call_back(bot, update):
             # https://stackoverflow.com/a/678242/4723940
             file_size = os.stat(download_directory).st_size
         if file_size > Config.TG_MAX_FILE_SIZE:
-            await bot.edit_message_text(
-                chat_id=update.message.chat.id,
-                text=Translation.RCHD_TG_API_LIMIT.format(time_taken_for_download, humanbytes(file_size)),
-                message_id=update.id
+            await update.message.edit_caption(
+                
+                caption=Translation.RCHD_TG_API_LIMIT.format(time_taken_for_download, humanbytes(file_size)),
+                parse_mode=enums.ParseMode.HTML
             )
         else:
-            await bot.edit_message_text(
-                text=Translation.UPLOAD_START,
-                chat_id=update.message.chat.id,
-                message_id=update.id
+            await update.message.edit_caption(
+                caption=Translation.UPLOAD_START,
+                parse_mode=enums.ParseMode.HTML
             )
             # ref: message from @Sources_codes
             start_time = time.time()
@@ -278,11 +276,9 @@ async def youtube_dl_call_back(bot, update):
                 os.remove(thumbnail)
             except:
                 pass
-            await bot.edit_message_text(
-                text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload),
-                chat_id=update.message.chat.id,
-                message_id=update.id,
-                disable_web_page_preview=True
+            await update.message.edit_caption(
+                caption=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload),
+                parse_mode=enums.ParseMode.HTML
             )
             logger.info("✅ " + custom_file_name)
             logger.info("✅ Downloaded in: " + str(time_taken_for_download))
