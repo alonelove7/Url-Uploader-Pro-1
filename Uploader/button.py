@@ -134,9 +134,7 @@ async def youtube_dl_call_back(bot, update):
     if youtube_dl_username is not None:
         command_to_exec.append("--username")
         command_to_exec.append(youtube_dl_username)
-    if "hotstar" in url:
-        command_to_exec.append("--geo-bypass-country")
-        command_to_exec.append("IN")
+
 
     if youtube_dl_password is not None:
         command_to_exec.append("--password")
@@ -292,7 +290,7 @@ async def youtube_dl_call_back(bot, update):
             time_taken_for_upload = (end_two - end_one).seconds
             try:
                 shutil.rmtree(tmp_directory_for_each_user)
-                os.remove(thumbnail)
+                os.remove(thumb_image_path)
             except:
                 pass
             await update.message.edit_caption(
