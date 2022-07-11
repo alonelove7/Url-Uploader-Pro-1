@@ -98,28 +98,7 @@ async def echo(bot, update):
                 o = entity.offset
                 l = entity.length
                 url = url[o:o + l]
-    if Config.HTTP_PROXY != "":
-        command_to_exec = [
-            "yt-dlp",
-            "--no-warnings",
-            "-F", "--cookies", "cookies.txt",
-            "--write-info-json",
-            "--youtube-skip-hls-manifest",
-            "-j",
-            url,
-            "--proxy", Config.HTTP_PROXY
-        ]
-    else:
-        command_to_exec = [
-            "yt-dlp",
-            "--no-warnings",
-            "-F", "--cookies", "cookies.txt",
-            
-            "--write-info-json",
-            "--youtube-skip-hls-manifest",
-            "-j",
-            url
-        ]
+
     if youtube_dl_username is not None:
         command_to_exec.append("--username")
         command_to_exec.append(youtube_dl_username)
