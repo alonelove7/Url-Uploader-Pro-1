@@ -83,14 +83,17 @@ async def youtube_dl_call_back(bot, update):
                 o = entity.offset
                 l = entity.length
                 youtube_dl_url = youtube_dl_url[o:o + l]
+    description = custom_file_name
+    if not "." + youtube_dl_ext in custom_file_name:
+        custom_file_name += '.' + youtube_dl_ext
+    logger.info(youtube_dl_url)
+    logger.info(custom_file_name)
+    
     await update.message.edit_caption(
         caption=Translation.DOWNLOAD_START,
         parse_mode=enums.ParseMode.HTML
     )
-    description = Translation.CUSTOM_CAPTION_UL_FILE
-    if "fulltitle" in response_json:
-        description = response_json["fulltitle"][0:1021]
-        # escape Markdown and special characters
+
     tmp_directory_for_each_user = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + f'{random1}'
     if not os.path.isdir(tmp_directory_for_each_user):
         os.makedirs(tmp_directory_for_each_user)
@@ -101,8 +104,8 @@ async def youtube_dl_call_back(bot, update):
     else:
         file_name = custom_file_name
     download_directory = tmp_directory_for_each_user + "/" + str(file_name)
-
     command_to_exec = []
+
    
     if tg_send_type == "audio":
         command_to_exec = [
