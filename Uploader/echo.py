@@ -9,7 +9,7 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger(__name__)
 import requests, urllib.parse, filetype, os, time, shutil, tldextract, asyncio, json, math
 from PIL import Image
-from plugins.config import Config
+from Uploader.config import Config
 import time
 from Uploader.script import Translation
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
