@@ -137,6 +137,9 @@ async def youtube_dl_call_back(bot, update):
     if youtube_dl_username is not None:
         command_to_exec.append("--username")
         command_to_exec.append(youtube_dl_username)
+    if Config.BYPASS != "":
+        command_to_exec.append("--geo-bypass-country")
+        command_to_exec.append(Config.BYPASS)
     if youtube_dl_password is not None:
         command_to_exec.append("--password")
         command_to_exec.append(youtube_dl_password)
