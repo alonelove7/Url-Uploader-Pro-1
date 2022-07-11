@@ -15,7 +15,7 @@ from datetime import datetime
 from Uploader.config import Config
 from Uploader.script import Translation
 from Uploader.thumbnail import *
-from plugins.database.database import db
+from Uploader.database.database import db
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 from Uploader.functions.display_progress import progress_for_pyrogram, humanbytes, TimeFormatter
 from hachoir.metadata import extractMetadata
