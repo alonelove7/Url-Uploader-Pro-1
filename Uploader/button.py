@@ -152,7 +152,75 @@ async def youtube_dl_call_back(bot, update):
     # command_to_exec.append("--quiet")
     logger.info(command_to_exec)
    
+    start = datetime.now()
+    process = await asyncio.create_subprocess_exec(
+        *command_to_exec,
+        # stdout must a pipe to be accessible as process.stdout
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
+    )
+    # Wait for the subprocess to finish
+    stdout, stderr = await process.communicate()
+    e_response = stderr.decode().strip()
+    t_response = stdout.decode().strip()
+    logger.info(e_response)
+    logger.info(t_response)
+    ad_string_to_replace = "please report this issue on https://yt-dl.org/bug . Make sure you are using the latest version; see  https://yt-dl.org/update  on how to update. Be sure to call youtube-dl with the --verbose flag and include its complete output."
+    if e_response and ad_string_to_replace in e_response:
+        error_message = e_response.replace(ad_string_to_replace, "")
+        await update.message.edit_caption(
+            parse_mode=enums.ParseMode.HTML,
+            text=error_message
+        )
+        return False
 
+    if t_response:
+        logger.info(t_response)
+        try:
+            os.remove(save_ytdl_json_path)
+        except FileNotFoundError as exc:
+            pass
+        
+        end_one = datetime.now()
+        time_taken_for_download = (end_one -start).seconds
+        file_size = Config.TG_MAX_FILE_SIZE + 1
+        try:
+            file_size = os.stat(download_directory).st_size
+        except FileNotFoundError as exc:
+            download_directory = os.path.splitext(download_directory)[0] + "." + "mkv"
+            # https://stackoverflow.com/a/678242/4723940
+            file_size = os.stat(download_directory).st_size
+        try:
+            if tg_send_type == 'video' and 'webm' in download_directory:
+                ownload_directory = download_directory.rsplit('.', 1)[0] + '.mkv'
+                os.rename(download_directory, ownload_directory)
+                download_directory = ownload_directory
+        except:
+            pass
+
+        if file_size > Config.TG_MAX_FILE_SIZE:
+            await update.message.edit_caption(
+                
+                caption=Translation.RCHD_TG_API_LIMIT.format(time_taken_for_download, humanbytes(file_size)),
+                parse_mode=enums.ParseMode.HTML
+            )
+        else:
+            is_w_f = False
+            '''images = await generate_screen_shots(
+                download_directory,
+                tmp_directory_for_each_user,
+                is_w_f,
+                Config.DEF_WATER_MARK_FILE,
+                300,
+                9
+            )
+            logger.info(images)'''
+            await update.message.edit_caption(
+                caption=Translation.UPLOAD_START,
+                parse_mode=enums.ParseMode.HTML
+            )
+
+            # ref: message from @Sources_codes
             start_time = time.time()
             if (await db.get_upload_as_doc(update.from_user.id)) is False:
                 thumbnail = await Gthumb01(bot, update)
@@ -223,25 +291,21 @@ async def youtube_dl_call_back(bot, update):
                     progress_args=(
                         Translation.UPLOAD_START,
                         update.message,
-                        start_time))
-
-            asyncio.create_task(clendir(tmp_directory_for_each_user))
-            asyncio.create_task(clendir(thumbnail))
+                        start_time
+                    )
+                )
+            else:
+                logger.info("Did this happen? :\\")
+            end_two = datetime.now()
+            time_taken_for_upload = (end_two - end_one).seconds
+            try:
+                shutil.rmtree(tmp_directory_for_each_user)
+                os.remove(thumbnail)
+            except:
+                pass
             await update.message.edit_caption(
-            caption="Uploaded sucessfully ✓\n\nJOIN : @Tellybots",
-            parse_mode=enums.ParseMode.HTML)
+                caption=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload),
+                parse_mode=enums.ParseMode.HTML
+            )
 
-#=================================
 
-async def clendir(directory):
-
-    try:
-        shutil.rmtree(directory)
-    except:
-        pass
-    try:
-        os.remove(directory)
-    except:
-        pass
-
-#=================================
