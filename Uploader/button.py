@@ -101,7 +101,7 @@ async def youtube_dl_call_back(bot, update):
         command_to_exec = [
             "yt-dlp",
             "-c",
-            "--cookies", "cookies.txt",
+            "-F", "--cookies", "cookies.txt", '-vU',
             "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
             "--prefer-ffmpeg",
             "--extract-audio",
@@ -119,10 +119,10 @@ async def youtube_dl_call_back(bot, update):
             "--cookies", "cookies.txt",
             #"--geo-bypass-country", Config.BYPASS,
             "--write-info-json",
-            
+            "-F", "--cookies", "cookies.txt", '-vU',
             "--ignore-no-formats-error",
             "--embed-subs",
-            "-f",
+            
             "--prefer-free-formats",
             "--prefer-ffmpeg",
             youtube_dl_url,
