@@ -149,68 +149,54 @@ async def youtube_dl_call_back(bot, update):
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,
     )
-    # Wait for the subprocess to finish
+    start = datetime.now()
+    process = await asyncio.create_subprocess_exec(*command_to_exec,
+    stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,)
+
     stdout, stderr = await process.communicate()
     e_response = stderr.decode().strip()
     t_response = stdout.decode().strip()
-    logger.info(e_response)
-    logger.info(t_response)
+
     ad_string_to_replace = "please report this issue on https://yt-dl.org/bug . Make sure you are using the latest version; see  https://yt-dl.org/update  on how to update. Be sure to call youtube-dl with the --verbose flag and include its complete output."
     if e_response and ad_string_to_replace in e_response:
         error_message = e_response.replace(ad_string_to_replace, "")
-        await update.message.edit_caption(
-            parse_mode=enums.ParseMode.HTML,
-            text=error_message
-        )
+        await bot.edit_message_text(
+        chat_id=update.message.chat.id,
+        message_id=update.message.message_id,
+        text=error_message)
         return False
-
     if t_response:
-        logger.info(t_response)
-        try:
-            os.remove(save_ytdl_json_path)
-        except FileNotFoundError as exc:
-            pass
-        
-        end_one = datetime.now()
-        time_taken_for_download = (end_one -start).seconds
-        file_size = Config.TG_MAX_FILE_SIZE + 1
+        os.remove(save_ytdl_json_path)
+        asyncio.create_task(clendir(save_ytdl_json_path))
         try:
             file_size = os.stat(download_directory).st_size
-        except FileNotFoundError as exc:
-            download_directory = os.path.splitext(download_directory)[0] + "." + "mkv"
-            # https://stackoverflow.com/a/678242/4723940
-            file_size = os.stat(download_directory).st_size
-        try:
-            if tg_send_type == 'video' and 'webm' in download_directory:
-                ownload_directory = download_directory.rsplit('.', 1)[0] + '.mkv'
-                os.rename(download_directory, ownload_directory)
-                download_directory = ownload_directory
-        except:
-            pass
+        except FileNotFoundError:
+            try:
+                directory = os.path.splitext(download_directory)[0] + "." + "mp4"
+                file_size = os.stat(directory).st_size
+            except FileNotFoundError:
+                try:
+                    directory = os.path.splitext(download_directory)[0] + "." + "mkv"
+                    file_size = os.stat(directory).st_size
+                except FileNotFoundError:
+                    file_size = 0
 
+        if file_size == 0:
+             await update.message.edit(text="File Not found 🤒")
+             asyncio.create_task(clendir(tmp_directory_for_each_user))
+             return
         if file_size > Config.TG_MAX_FILE_SIZE:
-            await update.message.edit_caption(
-                
-                caption=Translation.RCHD_TG_API_LIMIT.format(time_taken_for_download, humanbytes(file_size)),
-                parse_mode=enums.ParseMode.HTML
-            )
+            await bot.edit_message_text(
+            chat_id=update.message.chat.id,
+            text=Translation.RCHD_TG_API_LIMIT.format(time_taken_for_download, humanbytes(file_size)),
+            message_id=update.message.message_id)
         else:
-            is_w_f = False
-            '''images = await generate_screen_shots(
-                download_directory,
-                tmp_directory_for_each_user,
-                is_w_f,
-                Config.DEF_WATER_MARK_FILE,
-                300,
-                9
-            )
-            logger.info(images)'''
             await update.message.edit_caption(
-                caption=Translation.UPLOAD_START,
-                parse_mode=enums.ParseMode.HTML
+            caption=Translation.UPLOAD_START,
+            parse_mode=enums.ParseMode.HTML
             )
+            #start_time = time.time()
 
-            # ref: message from @Sources_codes
             start_time = time.time()
             if (await db.get_upload_as_doc(update.from_user.id)) is False:
                 thumbnail = await Gthumb01(bot, update)
