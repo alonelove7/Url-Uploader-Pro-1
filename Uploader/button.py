@@ -101,7 +101,7 @@ async def youtube_dl_call_back(bot, update):
         command_to_exec = [
             "yt-dlp",
             "-c",
-            "--cookies", "C:\Users\Tellybots\Downloads\cookies.txt",
+            "--cookies", "cookies.txt",
             "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
             "--prefer-ffmpeg",
             "--extract-audio",
