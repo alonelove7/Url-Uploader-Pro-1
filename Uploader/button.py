@@ -96,39 +96,36 @@ async def youtube_dl_call_back(bot, update):
         os.makedirs(tmp_directory_for_each_user)
     download_directory = tmp_directory_for_each_user + "/" + custom_file_name
     command_to_exec = []
-    command_to_exec = []
+   
     if tg_send_type == "audio":
         command_to_exec = [
             "yt-dlp",
             "-c",
-            "-F", "--cookies", "cookies.txt", '-vU',
             "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
             "--prefer-ffmpeg",
             "--extract-audio",
+            "--no-check-certificates",
             "--audio-format", youtube_dl_ext,
             "--audio-quality", youtube_dl_format,
             youtube_dl_url,
             "-o", download_directory
-        
         ]
     else:
-
+        # command_to_exec = ["youtube-dl", "-f", youtube_dl_format, "--hls-prefer-ffmpeg", "--recode-video", "mp4", "-k", youtube_dl_url, "-o", download_directory]
+        minus_f_format = youtube_dl_format
+        if "youtu" in youtube_dl_url:
+            minus_f_format = youtube_dl_format + "+bestaudio"
         command_to_exec = [
             "yt-dlp",
             "-c",
-            "--cookies", "cookies.txt",
-            #"--geo-bypass-country", Config.BYPASS,
-            "--write-info-json",
-            "-F", "--cookies", "cookies.txt",
-            "--ignore-no-formats-error",
+            "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
             "--embed-subs",
-            
-            "--prefer-free-formats",
-            "--prefer-ffmpeg",
-            youtube_dl_url,
-            "-o",
-            download_directory,
+            "--no-check-certificates",
+            "-f", minus_f_format,
+            "--prefer-ffmpeg", youtube_dl_url,
+            "-o", download_directory
         ]
+
  
 
     if Config.HTTP_PROXY != "":
