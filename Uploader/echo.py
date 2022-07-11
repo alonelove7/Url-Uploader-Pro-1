@@ -103,7 +103,7 @@ async def echo(bot, update):
             "yt-dlp",
             "--no-warnings",
             "--cookies", "cookies.txt",
-            "-v", "--geo-bypass-country", Config.BYPASS,
+            "--geo-bypass-country IN",
             "--youtube-skip-hls-manifest",
             "-j",
             url,
