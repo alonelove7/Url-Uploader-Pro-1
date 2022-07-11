@@ -198,7 +198,7 @@ async def youtube_dl_call_back(bot, update):
                     #chat_id=update.message.chat.id,
                     audio=download_directory,
                     caption=description,
-                    parse_mode="HTML",
+                    #parse_mode="HTML",
                     duration=duration,
                     thumb=thumbnail,
                     #reply_to_message_id=update.id,
@@ -217,7 +217,7 @@ async def youtube_dl_call_back(bot, update):
                     document=download_directory,
                     thumb=thumbnail,
                     caption=description,
-                    parse_mode="HTML",
+                    #parse_mode="HTML",
                     #reply_to_message_id=update.id,
                     progress=progress_for_pyrogram,
                     progress_args=(
@@ -235,7 +235,9 @@ async def youtube_dl_call_back(bot, update):
                     video_note=download_directory,
                     duration=duration,
                     length=width,
+
                     thumb=thumb_image_path,
+
                     #reply_to_message_id=update.id,
                     progress=progress_for_pyrogram,
                     progress_args=(
@@ -252,7 +254,7 @@ async def youtube_dl_call_back(bot, update):
                    # chat_id=update.message.chat.id,
                     video=download_directory,
                     caption=description,
-                    parse_mode="HTML",
+                    #parse_mode="HTML",
                     duration=duration,
                     width=width,
                     height=height,
