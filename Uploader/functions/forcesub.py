@@ -1,5 +1,5 @@
 import asyncio
-from plugins.config import Config
+from Uploader.config import Config
 from pyrogram import Client, enums
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
