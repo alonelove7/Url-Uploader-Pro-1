@@ -12,7 +12,7 @@ from asyncio import TimeoutError
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
 from Uploader.config import Config
-from pyrogram.script import Translation
+from Uploader.script import Translation
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from Uploader.database.add import add_user_to_database
