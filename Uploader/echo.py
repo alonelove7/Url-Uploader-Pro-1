@@ -103,7 +103,7 @@ async def echo(bot, update):
             "yt-dlp",
             "--no-warnings",
             "--cookies", "cookies.txt",
-            
+            "--write-info-json",
             "--youtube-skip-hls-manifest",
             "-j",
             url,
@@ -114,7 +114,7 @@ async def echo(bot, update):
             "yt-dlp",
             "--no-warnings",
             "--cookies", "cookies.txt",
-            
+            "--write-info-json",
             "--youtube-skip-hls-manifest",
             "-j",
             url
