@@ -41,12 +41,12 @@ async def youtube_dl_call_back(bot, update):
     except (FileNotFoundError) as e:
         await update.message.delete()
         return False
-     youtube_dl_url = update.message.reply_to_message.text
+    youtube_dl_url = update.message.reply_to_message.text
     custom_file_name = str(response_json.get("title"))[:50]
     youtube_dl_username = None
     youtube_dl_password = None
     if "|" in youtube_dl_url:
-        url_parts = youtube_dl_url.split(" * ")
+        url_parts = youtube_dl_url.split("|")
         if len(url_parts) == 2:
             youtube_dl_url = url_parts[0]
             custom_file_name = url_parts[1]
