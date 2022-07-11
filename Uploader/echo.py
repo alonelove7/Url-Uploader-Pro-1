@@ -27,7 +27,7 @@ from Uploader.functions.ran_text import random_char
 from Uploader.database.add import add_user_to_database
 from pyrogram.types import Thumbnail
 
-
+@Client.on_message(filters.private & filters.regex(pattern=".*http.*"))
 def _download(bot, update):
     logger.info(update.from_user)
     url = update.text
