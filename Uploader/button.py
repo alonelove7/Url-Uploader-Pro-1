@@ -160,10 +160,9 @@ async def youtube_dl_call_back(bot, update):
     ad_string_to_replace = "please report this issue on https://yt-dl.org/bug . Make sure you are using the latest version; see  https://yt-dl.org/update  on how to update. Be sure to call youtube-dl with the --verbose flag and include its complete output."
     if e_response and ad_string_to_replace in e_response:
         error_message = e_response.replace(ad_string_to_replace, "")
-        await bot.edit_message_text(
-        chat_id=update.message.chat.id,
-        message_id=update.message.message_id,
-        text=error_message)
+        await update.message.edit_caption(
+        
+        caption=error_message)
         return False
     if t_response:
         os.remove(save_ytdl_json_path)
@@ -182,19 +181,18 @@ async def youtube_dl_call_back(bot, update):
                     file_size = 0
 
         if file_size == 0:
-             await update.message.edit(text="File Not found 🤒")
+             await update.message.edit(text="No Such File Or Directory Found")
              asyncio.create_task(clendir(tmp_directory_for_each_user))
              return
         if file_size > Config.TG_MAX_FILE_SIZE:
-            await bot.edit_message_text(
-            chat_id=update.message.chat.id,
-            text=Translation.RCHD_TG_API_LIMIT.format(time_taken_for_download, humanbytes(file_size)),
-            message_id=update.message.message_id)
+            await update.message.edit_caption(
+            
+            caption=Translation.RCHD_TG_API_LIMIT.format(time_taken_for_download, humanbytes(file_size)),
+            parse_mode=enums.ParseMode.HTML)
         else:
             await update.message.edit_caption(
             caption=Translation.UPLOAD_START,
-            parse_mode=enums.ParseMode.HTML
-            )
+            parse_mode=enums.ParseMode.HTML)
             #start_time = time.time()
 
             start_time = time.time()
