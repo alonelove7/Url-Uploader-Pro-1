@@ -102,7 +102,7 @@ async def echo(bot, update):
         command_to_exec = [
             "yt-dlp",
             "--no-warnings",
-            "-F", "--cookies", "cookies.txt", '-vU',
+            "-F", "--cookies", "cookies.txt",
             "--write-info-json",
             "--youtube-skip-hls-manifest",
             "-j",
@@ -113,7 +113,7 @@ async def echo(bot, update):
         command_to_exec = [
             "yt-dlp",
             "--no-warnings",
-            "-F", "--cookies", "cookies.txt", '-vU',
+            "-F", "--cookies", "cookies.txt",
             
             "--write-info-json",
             "--youtube-skip-hls-manifest",
