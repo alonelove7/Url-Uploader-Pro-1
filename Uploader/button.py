@@ -235,6 +235,7 @@ async def youtube_dl_call_back(bot, update):
                     progress_args=(
                         Translation.UPLOAD_START,
                         update.message,
+                        custom_file_name,
                         start_time
                     )
                 )
@@ -256,6 +257,7 @@ async def youtube_dl_call_back(bot, update):
                     progress_args=(
                         Translation.UPLOAD_START,
                         update.message,
+                        custom_file_name,
                         start_time
                     )
                 )
@@ -274,6 +276,7 @@ async def youtube_dl_call_back(bot, update):
                     progress_args=(
                         Translation.UPLOAD_START,
                         update.message,
+                        custom_file_name,
                         start_time
                     )
                 )
@@ -291,6 +294,7 @@ async def youtube_dl_call_back(bot, update):
                     progress_args=(
                         Translation.UPLOAD_START,
                         update.message,
+                        custom_file_name,
                         start_time
                     )
                 )
@@ -307,5 +311,7 @@ async def youtube_dl_call_back(bot, update):
                 caption=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload),
                 parse_mode=enums.ParseMode.HTML
             )
-
+            logger.info("✅ " + custom_file_name)
+            logger.info("✅ Downloaded in: " + str(time_taken_for_download))
+            logger.info("✅ Uploaded in: " + str(time_taken_for_upload))
 
