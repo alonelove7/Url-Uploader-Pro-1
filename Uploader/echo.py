@@ -102,6 +102,8 @@ async def echo(bot, update):
         command_to_exec = [
             "yt-dlp",
             "--no-warnings",
+            "--cookies", "cookies.txt",
+            "--geo-bypass-country IN",
             "--youtube-skip-hls-manifest",
             "-j",
             url,
@@ -111,6 +113,8 @@ async def echo(bot, update):
         command_to_exec = [
             "yt-dlp",
             "--no-warnings",
+            "--cookies", "cookies.txt",
+            "--geo-bypass-country IN",
             "--youtube-skip-hls-manifest",
             "-j",
             url
