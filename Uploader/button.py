@@ -119,7 +119,7 @@ async def youtube_dl_call_back(bot, update):
             "--cookies", "cookies.txt",
             #"--geo-bypass-country", Config.BYPASS,
             "--write-info-json",
-            "-F", "--cookies", "cookies.txt", '-vU',
+            "-F", "--cookies", "cookies.txt",
             "--ignore-no-formats-error",
             "--embed-subs",
             
