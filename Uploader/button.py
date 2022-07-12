@@ -92,20 +92,21 @@ async def youtube_dl_call_back(bot, update):
         custom_file_name += '.' + youtube_dl_ext
     logger.info(youtube_dl_url)
     logger.info(custom_file_name)
-    c_time = time.time()
-    await bot.download_media(
-        
-        message_id=update.message.id,
-        
-        progress=progress_for_pyrogram,
-            progress_args=(
-            Translation.DOWNLOAD_START.format(custom_file_name),
-            update.message,
-            #custom_file_name,
-             c_time
-               
-         )
-    )
+    
+    now = time.time()
+    diff = now - start
+    if round(diff % 5.00) == 0 or downloaded == total_length:
+        percentage = downloaded * 100 / total_length
+        speed = downloaded / diff
+        elapsed_time = round(diff) * 1000
+        time_to_completion = round(
+             (total_length - downloaded) / speed) * 1000
+        estimated_total_time = elapsed_time + time_to_completion
+        try:
+            progress = "<b>Downloading to my server now...</b> 📥\n[{0}{1}] {2}%\n📁 <i>{3}</i>\n\n".format(
+''.join(["●" for i in range(math.floor(percentage / 5))]), ''.join(["○" for i in range(20 - math.floor(percentage / 5))]),
+round(percentage, 2), file_name.split("/")[-1])current_message = progress + """🔹<b>Finished ✅:</b> {0} of {1}🔹<b>Speed 🚀:</b> {2}/s🔹<b>Time left 🕒:</b> {3}<i><b>Note: </b>fembed links are very slow, so be patient.</i>""".format(humanbytes(downloaded),humanbytes(total_length), humanbytes(speed), TimeFormatter(time_to_completion))
+
 
     tmp_directory_for_each_user = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + f'{ranom}'
     if not os.path.isdir(tmp_directory_for_each_user):
