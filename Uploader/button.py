@@ -201,7 +201,7 @@ async def youtube_dl_call_back(bot, update):
                     #parse_mode="HTML",
                     duration=duration,
                     thumb=thumbnail,
-                    #reply_to_message_id=update.id,
+                    reply_to_message_id=update.id,
                     progress=progress_for_pyrogram,
                     progress_args=(
                         Translation.UPLOAD_START,
@@ -218,7 +218,7 @@ async def youtube_dl_call_back(bot, update):
                     thumb=thumbnail,
                     caption=description,
                     #parse_mode="HTML",
-                    #reply_to_message_id=update.id,
+                    reply_to_message_id=update.id,
                     progress=progress_for_pyrogram,
                     progress_args=(
                         Translation.UPLOAD_START,
@@ -238,7 +238,7 @@ async def youtube_dl_call_back(bot, update):
 
                     thumb=thumb_image_path,
 
-                    #reply_to_message_id=update.id,
+                    reply_to_message_id=update.id,
                     progress=progress_for_pyrogram,
                     progress_args=(
                         Translation.UPLOAD_START,
@@ -260,7 +260,7 @@ async def youtube_dl_call_back(bot, update):
                     height=height,
                     thumb=thumbnail,
                     supports_streaming=True,
-                    #reply_to_message_id=update.id,
+                    reply_to_message_id=update.id,
                     progress=progress_for_pyrogram,
                     progress_args=(
                         Translation.UPLOAD_START,
