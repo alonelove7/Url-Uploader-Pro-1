@@ -41,5 +41,33 @@ async def help_bot(_, m: Message):
         disable_web_page_preview=True,
     )
 
+@Client.on_message(filters.private & filters.reply & filters.text)
+async def edit_caption(bot, update):
+    try:
+        await bot.send_cached_media(
+            chat_id=update.chat.id,
+            file_id=update.reply_to_message.video.file_id,
+            reply_to_message_id=update.id,
+            caption=update.text
+        )
+    except:
+        try:
+            await bot.send_cached_media(
+                chat_id=update.chat.id,
+                file_id=update.reply_to_message.document.file_id,
+                reply_to_message_id=update.id,
+                caption=update.text
+            )
+        except:
+            pass
 
+
+@Client.on_message(filters.private & filters.command(["addcaption"]))
+async def add_caption_help(bot, update):
+    await bot.send_message(
+        chat_id=update.chat.id,
+        text=Translation.ADD_CAPTION_HELP,
+        #parse_mode="html",
+        reply_to_message_id=update.id
+    )
 
