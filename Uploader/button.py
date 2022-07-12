@@ -89,8 +89,10 @@ async def youtube_dl_call_back(bot, update):
     logger.info(youtube_dl_url)
     logger.info(custom_file_name)
     
-    await update.message.edit_caption(
-        caption=Translation.DOWNLOAD_START.format(custom_file_name)
+    await bot.edit_message_text(
+        chat_id=update.message.chat.id,
+        message_id=update.message.id,
+        text=Translation.DOWNLOAD_START.format(custom_file_name)
         
     )
 
@@ -159,9 +161,10 @@ async def youtube_dl_call_back(bot, update):
     ad_string_to_replace = "please report this issue on https://yt-dl.org/bug . Make sure you are using the latest version; see  https://yt-dl.org/update  on how to update. Be sure to call youtube-dl with the --verbose flag and include its complete output."
     if e_response and ad_string_to_replace in e_response:
         error_message = e_response.replace(ad_string_to_replace, "")
-        await update.message.edit_caption(
-            
-            caption=error_message
+        await bot.edit_message_text(
+            chat_id=update.message.chat.id,
+            message_id=update.message.id,
+            text=error_message
             
         )
         return False
@@ -178,14 +181,17 @@ async def youtube_dl_call_back(bot, update):
             # https://stackoverflow.com/a/678242/4723940
             file_size = os.stat(download_directory).st_size
         if file_size > Config.TG_MAX_FILE_SIZE:
-            await update.message.edit_caption(
-                
-                caption=Translation.RCHD_TG_API_LIMIT.format(time_taken_for_download, humanbytes(file_size))
+            await bot.edit_message_text(
+                chat_id=update.message.chat.id,
+                message_id=update.message.id,
+                text=Translation.RCHD_TG_API_LIMIT.format(time_taken_for_download, humanbytes(file_size))
                 
             )
         else:
-            await update.message.edit_caption(
-                caption=Translation.UPLOAD_START
+            await bot.edit_message_text(
+                chat_id=update.message.chat.id,
+                message_id=update.message.id,
+                text=Translation.UPLOAD_START
                
             )
             # ref: message from @Sources_codes
@@ -273,10 +279,12 @@ async def youtube_dl_call_back(bot, update):
                 os.remove(thumbnail)
             except:
                 pass
-            await update.message.edit_caption(
-                caption=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload)
+            await bot.edit_message_text(
+                chat_id=update.message.chat.id,
+                message_id=update.message.id,
+                text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload)
                 
             )
-            #logger.info("✅ " + custom_file_name)
+            logger.info("✅ " + custom_file_name)
             logger.info("✅ Downloaded in: " + str(time_taken_for_download))
             logger.info("✅ Uploaded in: " + str(time_taken_for_upload))
