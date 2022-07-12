@@ -106,28 +106,14 @@ async def youtube_dl_call_back(bot, update):
             progress = "<b>Downloading to my server now...</b> 📥\n[{0}{1}] {2}%\n📁 <i>{3}</i>\n\n".format(
 ''.join(["●" for i in range(math.floor(percentage / 5))]), ''.join(["○" for i in range(20 - math.floor(percentage / 5))]),
 round(percentage, 2), file_name.split("/")[-1])current_message = progress + """🔹<b>Finished ✅:</b> {0} of {1}🔹<b>Speed 🚀:</b> {2}/s🔹<b>Time left 🕒:</b> {3}<i><b>Note: </b>fembed links are very slow, so be patient.</i>""".format(humanbytes(downloaded),humanbytes(total_length), humanbytes(speed), TimeFormatter(time_to_completion))
-            if current_message != display_message:
-                """
-                await bot.edit_message_text(
-                    chat_id,
-                    message_id,
-                    text=current_message,
-                    reply_markup=InlineKeyboardMarkup([
-                        [
-                            InlineKeyboardButton(
-                                "Cancel download",
-                                callback_data="{}|{}".format("cancel", file_name)
-                            ),
-                        ],
-                    ]),
-                )
-                """
-                await bot.edit_message_text(
-                    chat_id,
-                    message_id,
-                    text=current_message
-                )
-                display_message = current_message
+    if current_message != display_message:
+
+    await bot.edit_message_text(
+        chat_id,
+        message_id,
+        text=current_message
+        )
+        display_message = current_message
 
     tmp_directory_for_each_user = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + f'{ranom}'
     if not os.path.isdir(tmp_directory_for_each_user):
