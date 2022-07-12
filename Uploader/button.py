@@ -195,7 +195,7 @@ async def youtube_dl_call_back(bot, update):
             if (await db.get_upload_as_doc(update.from_user.id)) is False:
                 thumbnail = await Gthumb01(bot, update)           
                 await bot.send_document(
-                    #chat_id=update.message.chat.id,
+                    chat_id=update.message.chat.id,
                     document=download_directory,
                     thumb=thumbnail,
                     caption=description,
@@ -212,7 +212,7 @@ async def youtube_dl_call_back(bot, update):
                  width, height, duration = await Mdata01(download_directory)
                  thumbnail = await Gthumb02(bot, update, duration, download_directory)
                  await bot.send_video(
-                    #chat_id=update.message.chat.id,
+                    chat_id=update.message.chat.id,
                     video=download_directory,
                     caption=description,
                     #parse_mode="HTML",
