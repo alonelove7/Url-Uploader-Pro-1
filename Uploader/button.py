@@ -215,7 +215,7 @@ async def youtube_dl_call_back(bot, update):
                     progress_args=(
                         Translation.UPLOAD_START,
                         update.message,
-                        custom_file_name,
+                        #custom_file_name,
                         start_time
                     )
                 )
