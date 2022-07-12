@@ -69,7 +69,7 @@ async def delete_thumbnail(bot, update):
         return
 
     download_location = os.path.join(
-        DOWNLOAD_LOCATION,
+        Config.DOWNLOAD_LOCATION,
         str(update.from_user.id)
     )
     try:
