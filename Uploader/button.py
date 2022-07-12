@@ -280,7 +280,7 @@ async def youtube_dl_call_back(bot, update):
                     )
                 )           
             else:
-                logger.info("🎧 Did This Happen")
+                logger.info("✅ " + custom_file_name)
             end_two = datetime.now()
             time_taken_for_upload = (end_two - end_one).seconds
             try:
@@ -294,6 +294,6 @@ async def youtube_dl_call_back(bot, update):
                 text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload)
                 
             )
-            logger.info("✅ " + custom_file_name)
+
             logger.info("✅ Downloaded in: " + str(time_taken_for_download))
             logger.info("✅ Uploaded in: " + str(time_taken_for_upload))
