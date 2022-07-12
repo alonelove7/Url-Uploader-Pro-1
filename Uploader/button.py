@@ -264,7 +264,7 @@ async def youtube_dl_call_back(bot, update):
                     )
                 )
             else:
-                logger.info("Did this happen? :\\")
+                logger.info("🎧 Did This Happen")
             end_two = datetime.now()
             time_taken_for_upload = (end_two - end_one).seconds
             try:
