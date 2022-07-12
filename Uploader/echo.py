@@ -29,7 +29,7 @@ from pyrogram.types import Thumbnail
 
 
 
-@Client.on_message(filters.private & filters.regex(pattern=".*http.*"))
+@Client.on_message(f)
 async def echo(bot, update):
     if Config.LOG_CHANNEL:
         try:
