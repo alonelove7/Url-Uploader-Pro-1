@@ -136,8 +136,8 @@ async def echo(bot, update):
             chat_id=update.chat.id,
             text=f'ᴘʀᴏᴄᴇssɪɴɢ ʏᴏᴜʀ ʟɪɴᴋ ⌛',
             disable_web_page_preview=True,
-            reply_to_message_id=update.id,
-            quote=True,
+            reply_to_message_id=update.id
+            
           )
     process = await asyncio.create_subprocess_exec(
         *command_to_exec,
@@ -163,7 +163,7 @@ async def echo(bot, update):
             chat_id=update.chat.id,
             text=Translation.NO_VOID_FORMAT_FOUND.format(str(error_message)),
             reply_to_message_id=update.id,
-            quote=True,
+            
             disable_web_page_preview=True
         )
         return False
@@ -272,7 +272,7 @@ async def echo(bot, update):
             chat_id=update.chat.id,
             text=Translation.FORMAT_SELECTION.format(Thumbnail) + "\n" + Translation.SET_CUSTOM_USERNAME_PASSWORD,
             reply_markup=reply_markup,
-            quote=True,
+            
             reply_to_message_id=update.id
         )
     else:
@@ -294,7 +294,7 @@ async def echo(bot, update):
             chat_id=update.chat.id,
             text=Translation.FORMAT_SELECTION,
             reply_markup=reply_markup,
-            quote=True,
+            
             reply_to_message_id=update.id
         )
 
