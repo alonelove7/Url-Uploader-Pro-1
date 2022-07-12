@@ -191,7 +191,78 @@ async def youtube_dl_call_back(bot, update):
             # ref: message from @Sources_codes
             start_time = time.time()
             # try to upload file
-
+            if (await db.get_upload_as_doc(update.from_user.id)) is False:
+                thumbnail = await Gthumb01(bot, update)
+                await update.message.reply_document(
+                    #chat_id=update.message.chat.id,
+                    document=download_directory,
+                    thumb=thumbnail,
+                    caption=description,
+                    parse_mode=enums.ParseMode.HTML,
+                    #reply_to_message_id=update.id,
+                    progress=progress_for_pyrogram,
+                    progress_args=(
+                        Translation.UPLOAD_START,
+                        update.message,
+                        start_time
+                    )
+                )
+            else:
+                 width, height, duration = await Mdata01(download_directory)
+                 thumb_image_path = await Gthumb02(bot, update, duration, download_directory)
+                 await update.message.reply_video(
+                    #chat_id=update.message.chat.id,
+                    video=download_directory,
+                    caption=description,
+                    duration=duration,
+                    width=width,
+                    height=height,
+                    supports_streaming=True,
+                    parse_mode=enums.ParseMode.HTML,
+                    thumb=thumb_image_path,
+                    #reply_to_message_id=update.id,
+                    progress=progress_for_pyrogram,
+                    progress_args=(
+                        Translation.UPLOAD_START,
+                        update.message,
+                        start_time
+                    )
+                )
+            if tg_send_type == "audio":
+                duration = await Mdata03(download_directory)
+                thumbnail = await Gthumb01(bot, update)
+                await update.message.reply_audio(
+                    #chat_id=update.message.chat.id,
+                    audio=download_directory,
+                    caption=description,
+                    parse_mode=enums.ParseMode.HTML,
+                    duration=duration,
+                    thumb=thumbnail,
+                    #reply_to_message_id=update.id,
+                    progress=progress_for_pyrogram,
+                    progress_args=(
+                        Translation.UPLOAD_START,
+                        update.message,
+                        start_time
+                    )
+                )
+            elif tg_send_type == "vm":
+                width, duration = await Mdata02(download_directory)
+                thumbnail = await Gthumb02(bot, update, duration, download_directory)
+                await update.message.reply_video_note(
+                    #chat_id=update.message.chat.id,
+                    video_note=download_directory,
+                    duration=duration,
+                    length=width,
+                    thumb=thumbnail,
+                    #reply_to_message_id=update.id,
+                    progress=progress_for_pyrogram,
+                    progress_args=(
+                        Translation.UPLOAD_START,
+                        update.message,
+                        start_time
+                    )
+                )
             else:
                 logger.info("Did this happen? :\\")
             end_two = datetime.now()
