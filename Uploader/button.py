@@ -93,7 +93,7 @@ async def youtube_dl_call_back(bot, update):
     logger.info(youtube_dl_url)
     logger.info(custom_file_name)
     c_time = time.time()
-    await bot.edit_message_text(
+    await bot.download_media(
         chat_id=update.message.chat.id,
         message_id=update.message.id,
         
