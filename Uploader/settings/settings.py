@@ -26,19 +26,13 @@ async def OpenSettings(m: "types.Message"):
                                                           callback_data="showThumbnail")])
     buttons_markup.append([types.InlineKeyboardButton("♨️ ᴄʟᴏsᴇ",
                                                       callback_data="close")])
-
-    try:
-        await m.edit(
-            text="**ʜᴇʀᴇ ʏᴏᴜ ᴄᴀɴ sᴇᴛᴜᴘ ʏᴏᴜʀ sᴇᴛᴛɪɴɢs**",
-            reply_markup=types.InlineKeyboardMarkup(buttons_markup),
-            disable_web_page_preview=True,
-            quote=True
-        )
-    except errors.MessageNotModified: pass
-    except errors.FloodWait as e:
+    except MessageNotModified:
+        pass
+    except FloodWait as e:
         await asyncio.sleep(e.x)
-        await show_settings(m)
+        await m.edit("You Are Spamming!")
     except Exception as err:
-        Config.LOGGER.getLogger(__name__).error(err)
+        raise err
+
 
 
