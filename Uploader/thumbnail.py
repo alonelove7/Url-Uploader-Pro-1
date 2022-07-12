@@ -33,6 +33,9 @@ from Uploader.config import Config
 from Uploader.database.add import add_user_to_database
 from Uploader.settings.settings import *
 
+f = filters.command(["delthumb"])
+s = filters.command("showthumb")
+
 @Client.on_message(filters.photo)
 async def save_photo(bot, update):
     if not update.from_user:
@@ -58,7 +61,8 @@ async def save_photo(bot, update):
     )
     await db.set_thumbnail(update.from_user.id, thumbnail=update.photo.file_id)
 
-@Client.on_message(filters.command(["delthumb"]))
+
+@Client.on_message(f)
 async def delete_thumbnail(bot, update):
     if not update.from_user:
         return await update.reply_text("I don't know about you sar :(")
@@ -84,7 +88,7 @@ async def delete_thumbnail(bot, update):
     )
     await db.set_thumbnail(update.from_user.id, thumbnail=None)
 
-@Client.on_message(filters.command("showthumb") )
+@Client.on_message(s)
 async def viewthumbnail(bot, update):
     if not update.from_user:
         return await update.reply_text("I don't know about you sar :(")
