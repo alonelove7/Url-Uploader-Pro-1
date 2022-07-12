@@ -116,7 +116,7 @@ async def youtube_dl_call_back(bot, update):
         humanbytes(total_length),
         humanbytes(speed),TimeFormatter(time_to_completion))
 
-        if current_message != display_message:
+    if current_message != display_message:
 
             
         await bot.edit_message_text(
