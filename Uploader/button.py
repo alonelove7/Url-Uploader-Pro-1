@@ -93,14 +93,14 @@ async def youtube_dl_call_back(bot, update):
     logger.info(youtube_dl_url)
     logger.info(custom_file_name)
 
-
-            
-        await bot.edit_message_text(
-        chat_id,
-        message_id,
-        text=f"Downloading",
+    await bot.edit_message_text(
+        text=Translation.DOWNLOAD_START.format(custom_file_name),
+        chat_id=update.message.chat.id,
         progress,
-        )
+        message_id=update.message.id
+    )
+            
+
    
     tmp_directory_for_each_user = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + f'{ranom}'
     if not os.path.isdir(tmp_directory_for_each_user):
