@@ -90,8 +90,8 @@ async def youtube_dl_call_back(bot, update):
     logger.info(custom_file_name)
     
     await update.message.edit_caption(
-        caption=Translation.DOWNLOAD_START.format(custom_file_name),
-        parse_mode=enums.ParseMode.HTML
+        caption=Translation.DOWNLOAD_START.format(custom_file_name)
+        
     )
 
     tmp_directory_for_each_user = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + f'{ranom}'
@@ -161,8 +161,8 @@ async def youtube_dl_call_back(bot, update):
         error_message = e_response.replace(ad_string_to_replace, "")
         await update.message.edit_caption(
             
-            caption=error_message,
-            parse_mode=enums.ParseMode.HTML
+            caption=error_message
+            
         )
         return False
     if t_response:
@@ -180,13 +180,13 @@ async def youtube_dl_call_back(bot, update):
         if file_size > Config.TG_MAX_FILE_SIZE:
             await update.message.edit_caption(
                 
-                caption=Translation.RCHD_TG_API_LIMIT.format(time_taken_for_download, humanbytes(file_size)),
-                parse_mode=enums.ParseMode.HTML
+                caption=Translation.RCHD_TG_API_LIMIT.format(time_taken_for_download, humanbytes(file_size))
+                
             )
         else:
             await update.message.edit_caption(
-                caption=Translation.UPLOAD_START,
-                parse_mode=enums.ParseMode.HTML
+                caption=Translation.UPLOAD_START
+               
             )
             # ref: message from @Sources_codes
             start_time = time.time()
@@ -273,8 +273,8 @@ async def youtube_dl_call_back(bot, update):
             except:
                 pass
             await update.message.edit_caption(
-                caption=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload),
-                parse_mode=enums.ParseMode.HTML
+                caption=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload)
+                
             )
             logger.info("✅ " + custom_file_name)
             logger.info("✅ Downloaded in: " + str(time_taken_for_download))
