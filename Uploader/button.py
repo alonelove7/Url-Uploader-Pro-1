@@ -96,10 +96,10 @@ async def youtube_dl_call_back(bot, update):
     await bot.edit_message_text(
         chat_id=update.message.chat.id,
         message_id=update.message.id,
-        text=Translation.DOWNLOAD_START.format(custom_file_name)
+        
         progress=progress_for_pyrogram,
            progress_args=(
-             Translation.UPLOAD_START,
+             Translation.DOWNLOAD_START.format(custom_file_name),
                  update.message,
                   #custom_file_name,
                    c_time
