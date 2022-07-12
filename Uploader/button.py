@@ -92,12 +92,19 @@ async def youtube_dl_call_back(bot, update):
         custom_file_name += '.' + youtube_dl_ext
     logger.info(youtube_dl_url)
     logger.info(custom_file_name)
-    
+    c_time = time.time()
     await bot.edit_message_text(
         chat_id=update.message.chat.id,
         message_id=update.message.id,
         text=Translation.DOWNLOAD_START.format(custom_file_name)
-        
+        progress=progress_for_pyrogram,
+           progress_args=(
+             Translation.UPLOAD_START,
+                 update.message,
+                  #custom_file_name,
+                   c_time
+               
+         )
     )
 
     tmp_directory_for_each_user = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + f'{ranom}'
