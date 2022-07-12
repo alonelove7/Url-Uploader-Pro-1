@@ -27,7 +27,7 @@ from Uploader.functions.ran_text import random_char
 from Uploader.database.add import add_user_to_database
 from pyrogram.types import Thumbnail
 
-f = filters.private & filters.regex(.^https*)
+f = filters.private & filters.regex(pattern=".*http.*")
 
 @Client.on_message(f)
 async def echo(bot, update):
