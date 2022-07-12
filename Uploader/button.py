@@ -92,16 +92,16 @@ async def youtube_dl_call_back(bot, update):
         custom_file_name += '.' + youtube_dl_ext
     logger.info(youtube_dl_url)
     logger.info(custom_file_name)
-     now = time.time()
-     diff = now - start
-     if round(diff % 5.00) == 0 or downloaded == total_length:
+    now = time.time()
+    diff = now - start
+    if round(diff % 5.00) == 0 or downloaded == total_length:
         percentage = downloaded * 100 / total_length
         speed = downloaded / diff
         elapsed_time = round(diff) * 1000
         time_to_completion = round(
                (total_length - downloaded) / speed) * 1000
         estimated_total_time = elapsed_time + time_to_completion
-     try:
+    try:
         progress = "<b>Downloading to my server now...</b> 📥\n[{0}{1}] {2}%\n📁 <i>{3}</i>\n\n".format(
  ''.join(["●" for i in range(math.floor(percentage / 5))]),
 ''.join(["○" for i in range(20 - math.floor(percentage / 5))]),
