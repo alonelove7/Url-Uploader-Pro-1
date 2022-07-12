@@ -33,7 +33,7 @@ async def youtube_dl_call_back(bot, update):
     tg_send_type, youtube_dl_format, youtube_dl_ext, ranom = cb_data.split("|")
     print(cb_data)
     random1 = random_char(5)
-    thumbnail = Config.DOWNLOAD_LOCATION + \
+    thumb_image_path = Config.DOWNLOAD_LOCATION + \
         "/" + str(update.from_user.id) + f'{ranom}' + ".jpg"
     save_ytdl_json_path = Config.DOWNLOAD_LOCATION + \
         "/" + str(update.from_user.id) + f'{ranom}' + ".json"
@@ -270,7 +270,7 @@ async def youtube_dl_call_back(bot, update):
             time_taken_for_upload = (end_two - end_one).seconds
             try:
                 shutil.rmtree(tmp_directory_for_each_user)
-                os.remove(thumbnail)
+                os.remove(thumb_image_path)
             except:
                 pass
             await update.message.edit_caption(
