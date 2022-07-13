@@ -18,7 +18,7 @@ from Uploader.database.add import AddUser
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from Uploader.database.database import db
 from Uploader.functions.forcesub import handle_force_subscribe
-
+from Uploader.settings.settings import *
 
 @Client.on_message(
     filters.command("start") & filters.private,
@@ -86,7 +86,7 @@ async def add_caption_help(bot, update):
 
 @Client.on_message(filters.private & filters.command("settings"))
 async def settings(bot: Client, m: Message):
-    await AddUserToDatabase(bot, m)
+    await AddUser(bot, m)
 
     editable = await m.reply_text("Please Wait ...", quote=True)
     await OpenSettings(editable, m.from_user.id)
