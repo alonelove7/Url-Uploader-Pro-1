@@ -31,11 +31,7 @@ f = filters.private & filters.regex(pattern=".*http.*")
 
 @Client.on_message(f)
 async def echo(bot, update):
-    await add_user_to_database(
-        uid=update.from_user.id,
-        fname=update.from_user.first_name,
-        lname=update.from_user.last_name,
-        )
+    await add_user_to_database(bot, update)
     if Config.LOG_CHANNEL:
         try:
             log_message = await update.forward(Config.LOG_CHANNEL)
