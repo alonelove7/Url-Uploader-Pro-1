@@ -42,7 +42,8 @@ async def save_photo(bot, update):
            await db.add_user(update.from_user.id)
 	   await bot.send_message(
 		   Config.LOG_CHANNEL,
-	           f"#NEW_USER: \n\nNew User [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started @{Config.BOT_USERNAME} !!")
+	           f"#NEW_USER: \n\nNew User [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started @{Config.BOT_USERNAME} !!"
+    )
     if Config.UPDATES_CHANNEL:
       fsub = await handle_force_subscribe(bot, update)
       if fsub == 400:
@@ -70,7 +71,9 @@ async def delete_thumbnail(bot, update):
            await db.add_user(update.from_user.id)
 	   await bot.send_message(
 		   Config.LOG_CHANNEL,
-	           f"#NEW_USER: \n\nNew User [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started @{Config.BOT_USERNAME} !!")
+	           f"#NEW_USER: \n\nNew User [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started @{Config.BOT_USERNAME} !!"
+       
+    )
 
     if Config.UPDATES_CHANNEL:
       fsub = await handle_force_subscribe(bot, update)
@@ -99,7 +102,8 @@ async def viewthumbnail(bot, update):
            await db.add_user(update.from_user.id)
 	   await bot.send_message(
 		   Config.LOG_CHANNEL,
-	           f"#NEW_USER: \n\nNew User [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started @{Config.BOT_USERNAME} !!")
+	           f"#NEW_USER: \n\nNew User [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started @{Config.BOT_USERNAME} !!"
+    )
     if Config.UPDATES_CHANNEL:
       fsub = await handle_force_subscribe(bot, update)
       if fsub == 400:
