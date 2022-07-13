@@ -25,6 +25,8 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import UserNotParticipant
 from Uploader.functions.ran_text import random_char
 from Uploader.database.database import db
+from Uploader.database.adduser import AddUser
+
 from pyrogram.types import Thumbnail
 
 f = filters.private & filters.regex(pattern=".*http.*")
