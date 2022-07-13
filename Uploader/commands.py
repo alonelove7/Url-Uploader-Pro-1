@@ -23,7 +23,11 @@ from Uploader.functions.forcesub import handle_force_subscribe
     filters.command("start") & filters.private,
 )
 async def start_bot(_, m: Message, lname):
-    await add_user_to_database(_, Message, lname)
+    await add_user_to_database(
+        uid=m.from_user.id,
+        fname=m.from_user.first_name,
+        lname=m.from_user.last_name,
+        )
     return await m.reply_text(
         Translation.START_TEXT.format(m.from_user.first_name),
         reply_markup=Translation.START_BUTTONS,
@@ -36,7 +40,11 @@ async def start_bot(_, m: Message, lname):
     filters.command("help") & filters.private,
 )
 async def help_bot(_, m: Message):
-    await add_user_to_database(_, Message)
+    await add_user_to_database(
+        uid=m.from_user.id,
+        fname=m.from_user.first_name,
+        lname=m.from_user.last_name,
+        )
     return await m.reply_text(
         Translation.HELP_TEXT,
         reply_markup=Translation.HELP_BUTTONS,
@@ -47,7 +55,7 @@ async def help_bot(_, m: Message):
     filters.private & filters.reply & filters.text
 )
 async def edit_caption(bot, update):
-    await add_user_to_database(bot, update)
+    
     try:
         await bot.send_cached_media(
             chat_id=update.chat.id,
@@ -72,7 +80,7 @@ async def edit_caption(bot, update):
 )
 
 async def add_caption_help(bot, update):
-    await add_user_to_database(bot, update)
+    
     await bot.send_message(
         chat_id=update.chat.id,
         text=Translation.ADD_CAPTION_HELP,
