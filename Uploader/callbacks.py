@@ -89,7 +89,9 @@ async def button(bot, update):
                     chat_id=update.message.chat.id,
                     message_id=update.message.message_id
                 )
-        await youtube_dl_call_back(bot, update)
+        else:
+            await youtube_dl_call_back(bot, update)
+
     elif "=" in update.data:
         await ddl_call_back(bot, update)
 
