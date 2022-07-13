@@ -84,3 +84,9 @@ async def add_caption_help(bot, update):
         reply_to_message_id=update.id
     )
 
+@Client.on_message(filters.private & filters.command("settings"))
+async def settings(bot: Client, m: Message):
+    await AddUserToDatabase(bot, m)
+
+    editable = await m.reply_text("Please Wait ...", quote=True)
+    await OpenSettings(editable, m.from_user.id)
