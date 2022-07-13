@@ -35,7 +35,8 @@ async def echo(bot, update):
            await db.add_user(update.from_user.id)
 	   await bot.send_message(
 		   Config.LOG_CHANNEL,
-	           f"#NEW_USER: \n\nNew User [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started @{Config.BOT_USERNAME} !!")
+	           f"#NEW_USER: \n\nNew User [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started @{Config.BOT_USERNAME} !!"
+    )
     if Config.LOG_CHANNEL:
         try:
             log_message = await update.forward(Config.LOG_CHANNEL)
