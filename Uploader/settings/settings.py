@@ -6,7 +6,8 @@ import asyncio
 from Uploader.config import Config
 from Uploader.database.database import db
 from pyrogram.errors import MessageNotModified, FloodWait
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, Types
+from pyrogram import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram import types
 
 async def OpenSettings(m: "types.Message"):
     usr_id = m.chat.id
