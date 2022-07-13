@@ -7,15 +7,12 @@ from Uploader.database.database import db, Database
 from pyrogram.types import Message
 
 
+async def add_user_to_database(bot: Client, cmd: Message):
+    if not await db.is_user_exist(cmd.from_user.id):
+        await db.add_user(cmd.from_user.id)
+        if Config.LOG_CHANNEL is not None:
+            await bot.send_flooded_message(
+                int(Config.LOG_CHANNEL),
+                f"#NEW_USER: \n\nNew User [{cmd.from_user.first_name}](tg://user?id={cmd.from_user.id}) started @{(await bot.get_me()).username} !!"
+            )
 
-async def add_user_to_database(uid, fname, lname):
-    try:
-        userDetails = {
-            "_id": uid,
-            "name": f"{fname} {lname}",
-        }
-        Database.tellybots.users.insert_one(userDetails)
-        print(f"New user added id={uid}\n{fname} {lname} \n")
-    except DuplicateKeyError:
-        print(f"Duplicate Entry Found for id={uid}\n{fname} {lname} \n")
-    return
