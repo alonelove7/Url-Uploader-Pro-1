@@ -138,7 +138,7 @@ async def youtube_dl_call_back(bot, update):
             "--embed-subs",
             "--embed-thumbnail",
             "--audio-multistreams", "--video-multistreams",
-            "-f", minus_f_format,
+            "-f", "-best",
             "--hls-prefer-ffmpeg", youtube_dl_url,
             "-o", download_directory
         ]
