@@ -88,5 +88,5 @@ async def add_caption_help(bot, update):
 async def settings(bot: Client, m: Message):
     await AddUser(bot, m)
 
-    editable = await m.reply_text("Please Wait ...", quote=True)
-    await OpenSettings(editable, m.from_user.id)
+    
+    await OpenSettings(m.from_user.id)
