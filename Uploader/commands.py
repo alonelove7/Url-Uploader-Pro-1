@@ -86,3 +86,9 @@ async def add_caption_help(bot, update):
     )
 
 
+@Client.on_message(filters.private & filters.command("settings"))
+async def settings_handler(bot: Client, m: Message):
+    await AddUser(bot, m)
+   
+    editable = await m.reply_text("**👀 Processing....**", quote=True)
+    await OpenSettings(editable, m.from_user.id)
