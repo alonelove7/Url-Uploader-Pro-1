@@ -130,7 +130,7 @@ sʜᴏᴡ ᴛʜᴜᴍʙɴᴀɪʟ
     ANNO_UPLOAD = " UploadinG📤 \n\n To  anonfiles.com "
     BAY_UPLOAD = " UploadinG📤 \n\n To  bayfiles.com "
     GO_FILE_UPLOAD = " 📤UploadinG📤 \n\n To  gofile.io "
-    DOWNLOAD_START = "ᴛʀʏɪɴɢ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ⌛\n\n💮🌸<i>{}💮🌸</i>"
+    DOWNLOAD_START = "ᴛʀʏɪɴɢ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ⌛\n\n💮🌸 <i>{} 💮🌸</i>"
     UPLOAD_START = "📤 Uᴘʟᴏᴀᴅɪɴɢ Pʟᴇᴀsᴇ Wᴀɪᴛ"
     RCHD_BOT_API_LIMIT = "size greater than maximum allowed size (50MB). Neverthless, trying to upload."
     RCHD_TG_API_LIMIT = "Downloaded in {} seconds.\nDetected File Size: {}\nSorry. But, I cannot upload files greater than 2GB due to Telegram API limitations."
