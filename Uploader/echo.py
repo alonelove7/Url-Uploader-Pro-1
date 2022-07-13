@@ -190,15 +190,15 @@ async def echo(bot, update):
                 if format_string is None:
                     format_string = formats.get("format")
                 format_ext = formats.get("ext")
-                #approx_file_size = ""
-                #if "filesize" in formats:
-                    #approx_file_size = humanbytes(formats["filesize"])
-                if formats.get('filesize'):
-                    size = formats['filesize']
-                elif formats.get('filesize_approx'):
-                    size = formats['filesize_approx']
-                else:
-                    size = 0
+                approx_file_size = ""
+                if "filesize" in formats:
+                    approx_file_size = humanbytes(formats["filesize"])
+                #if formats.get('filesize'):
+                    #size = formats['filesize']
+                #elif formats.get('filesize_approx'):
+                    #size = formats['filesize_approx']
+                #else:
+                    #size = 0
 
 
 
@@ -209,7 +209,7 @@ async def echo(bot, update):
                 if format_string is not None and not "audio only" in format_string:
                     ikeyboard = [
                         InlineKeyboardButton(
-                            "🎬 " + format_string + " " + format_ext + " " + " ",
+                            "🎬 " + format_string + " " + approx_file_size + format_ext + " " + " ",
                             callback_data=(cb_string_video).encode("UTF-8")
                         )
                     ]
@@ -228,7 +228,7 @@ async def echo(bot, update):
                     ikeyboard = [
                         InlineKeyboardButton(
                             "🎬 [" +
-                            "] ( " + " )",
+                            "] ( " + approx_file_size +  " )",
                             callback_data=(cb_string_video).encode("UTF-8")
                         )
                     ]
