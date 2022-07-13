@@ -85,8 +85,8 @@ async def add_caption_help(bot, update):
     )
 
 @Client.on_message(filters.private & filters.command("settings"))
-async def settings(bot: Client, m: Message):
-    await AddUser(bot, m)
+async def settings(bot: Client, user_id: int):
+    await AddUser(bot, int)
 
     
-    await OpenSettings(m.from_user.id)
+    await OpenSettings(int.from_user.id)
