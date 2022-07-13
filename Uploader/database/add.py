@@ -1,14 +1,12 @@
-# (c) @AbirHasan2005
 
-from Uploader.config import Config
-from .database import db
-from pyrogram import Client
-from pyrogram.types import Message
-
-
-async def add_user_to_database(bot: Client, cmd: Message):
-    if not await db.is_user_exist(cmd.from_user.id):
-        await db.add_user(cmd.from_user.id)
         
 
 
+from pyrogram import Client
+from database.access import client
+from pyrogram.types import Message
+
+
+async def add_user_to_database(bot: Client, update: Message):
+    if not await client.is_user_exist(update.from_user.id):
+           await client.add_user(update.from_user.id)
