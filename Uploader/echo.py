@@ -31,8 +31,8 @@ f = filters.private & filters.regex(pattern=".*http.*")
 
 @Client.on_message(f)
 async def echo(bot, update):
-    if not await db.is_user_exist(m.from_user.id): 
-    await db.add_user(m.from_user.id)
+    if not await db.is_user_exist(update.from_user.id): 
+    await db.add_user(update.from_user.id)
     if Config.LOG_CHANNEL:
         try:
             log_message = await update.forward(Config.LOG_CHANNEL)
