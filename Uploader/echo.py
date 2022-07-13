@@ -202,7 +202,7 @@ async def echo(bot, update):
             listener_dict[msg_id] = [listener, user_id, link, name, YTBUTTONS, args]
             bmsg = sendMarkup('Choose Playlist Videos Quality:', bot, message, YTBUTTONS)
         else:
-            formats = result.get('formats')
+            formats = response_json.get('formats')
             formats_dict = {}
             if formats is not None:
                 for frmt in formats:
