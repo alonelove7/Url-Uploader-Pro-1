@@ -24,7 +24,7 @@ from hachoir.parser import createParser
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import UserNotParticipant
 from Uploader.functions.ran_text import random_char
-from Uploader.database.add import add_user_to_database
+from Uploader.database.database import db
 from pyrogram.types import Thumbnail
 
 f = filters.private & filters.regex(pattern=".*http.*")
