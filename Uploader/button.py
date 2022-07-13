@@ -133,9 +133,11 @@ async def youtube_dl_call_back(bot, update):
         command_to_exec = [
             "yt-dlp",
             "-c",
-            "--embed-thumbnail",
+            
             "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
             "--embed-subs",
+            "--embed-thumbnail",
+            "--audio-multistreams", "--video-multistreams",
             "-f", minus_f_format,
             "--hls-prefer-ffmpeg", youtube_dl_url,
             "-o", download_directory
