@@ -19,7 +19,7 @@ from Uploader.database.add import AddUser
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from Uploader.database.database import db
 from Uploader.functions.forcesub import handle_force_subscribe
-from Uploader.settings.settings import *
+
 
 @Client.on_message(
     filters.command("start") & filters.private,
