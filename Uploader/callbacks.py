@@ -60,13 +60,13 @@ async def button(bot, update):
             disable_web_page_preview=True
         )
     elif update.data == "triggerUploadMode":
-    
+        await update.answer()
         upload_as_doc = await db.get_upload_as_doc(update.from_user.id)
-        if upload_as_doc is False:
-            await db.set_upload_as_doc(update.from_user.id, upload_as_doc=True)
-        elif upload_as_doc is True:
-            await db.set_upload_as_doc(update.from_user.id, upload_as_doc=False)
-        await OpenSettings(m=update.message, user_id=update.from_user.id)
+        if upload_as_doc:
+            await db.set_upload_as_doc(update.from_user.id, False)
+        else:
+            await db.set_upload_as_doc(update.from_user.id, True)
+        await OpenSettings(update.message)
     
 
     elif "close" in update.data:
