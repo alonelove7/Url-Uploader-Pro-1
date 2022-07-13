@@ -3,7 +3,7 @@
 
 
 from pyrogram import Client
-from database.access import client
+from Uploader.database.access import client
 from pyrogram.types import Message
 
 
