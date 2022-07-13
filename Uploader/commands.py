@@ -89,4 +89,4 @@ async def settings(bot: Client, m: Message):
     await AddUser(bot, m)
 
     
-    await OpenSettings(bot, m)
+    await OpenSettings(m)
