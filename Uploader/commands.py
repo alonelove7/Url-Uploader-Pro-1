@@ -23,7 +23,7 @@ from Uploader.functions.forcesub import handle_force_subscribe
     filters.command("start") & filters.private,
 )
 async def start_bot(_, m: Message):
-    await add_user_to_database(_, Message)
+    await add_user_to_database(_, Message, lname)
     return await m.reply_text(
         Translation.START_TEXT.format(m.from_user.first_name),
         reply_markup=Translation.START_BUTTONS,
