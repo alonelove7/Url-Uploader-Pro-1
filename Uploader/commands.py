@@ -14,6 +14,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, 
 from Uploader.config import Config
 from Uploader.script import Translation
 from pyrogram import Client, filters
+from Uploader.database.add import AddUser
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from Uploader.database.database import db
 from Uploader.functions.forcesub import handle_force_subscribe
