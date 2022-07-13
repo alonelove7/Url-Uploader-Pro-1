@@ -47,7 +47,7 @@ async def help_bot(_, m: Message):
     filters.private & filters.reply & filters.text
 )
 async def edit_caption(bot, update):
-    await add_user_to_database(_, Message)
+    await add_user_to_database(bot, update)
     try:
         await bot.send_cached_media(
             chat_id=update.chat.id,
@@ -72,7 +72,7 @@ async def edit_caption(bot, update):
 )
 
 async def add_caption_help(bot, update):
-    await add_user_to_database(_, Message)
+    await add_user_to_database(bot, update)
     await bot.send_message(
         chat_id=update.chat.id,
         text=Translation.ADD_CAPTION_HELP,
