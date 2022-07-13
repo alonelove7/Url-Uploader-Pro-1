@@ -51,12 +51,23 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
         except:
             pass
 
-def humanbytes(num: int, suffix='B'):
-    for unit in ['', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi']:
-        if abs(num) < 1024.0:
-            return "%3.1f%s%s" % (num, unit, suffix)
-        num /= 1024.0
-    return "%.1f%s%s" % (num, 'Yi', suffix)
+SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
+
+
+
+
+def humanbytes(size_in_bytes) -> str:
+    if size_in_bytes is None:
+        return '0B'
+    index = 0
+    while size_in_bytes >= 1024:
+        size_in_bytes /= 1024
+        index += 1
+    try:
+        return f'{round(size_in_bytes, 2)}{SIZE_UNITS[index]}'
+    except IndexError:
+        return 'File too large'
+
 def huanbytes(size):
     # https://stackoverflow.com/a/49361727/4723940
     # 2**10 = 1024
