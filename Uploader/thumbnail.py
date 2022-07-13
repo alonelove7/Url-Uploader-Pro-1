@@ -38,12 +38,7 @@ s = filters.command("showthumb")
 
 @Client.on_message(filters.photo)
 async def save_photo(bot, update):
-    if not await db.is_user_exist(update.from_user.id):
-           await db.add_user(update.from_user.id)
-	   await bot.send_message(
-		   Config.LOG_CHANNEL,
-	           f"#NEW_USER: \n\nNew User [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started @{Config.BOT_USERNAME} !!"
-    )
+    await AddUser(bot, update)
     if Config.UPDATES_CHANNEL:
       fsub = await handle_force_subscribe(bot, update)
       if fsub == 400:
@@ -67,14 +62,8 @@ async def save_photo(bot, update):
 
 @Client.on_message(f)
 async def delete_thumbnail(bot, update):
-    if not await db.is_user_exist(update.from_user.id):
-           await db.add_user(update.from_user.id)
-	   await bot.send_message(
-		   Config.LOG_CHANNEL,
-	           f"#NEW_USER: \n\nNew User [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started @{Config.BOT_USERNAME} !!"
-       
-    )
 
+    await AddUser(bot, update)
     if Config.UPDATES_CHANNEL:
       fsub = await handle_force_subscribe(bot, update)
       if fsub == 400:
@@ -98,12 +87,9 @@ async def delete_thumbnail(bot, update):
 
 @Client.on_message(s)
 async def viewthumbnail(bot, update):
-    if not await db.is_user_exist(update.from_user.id):
-           await db.add_user(update.from_user.id)
-	   await bot.send_message(
-		   Config.LOG_CHANNEL,
-	           f"#NEW_USER: \n\nNew User [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started @{Config.BOT_USERNAME} !!"
-    )
+
+    await AddUser(bot, update)
+
     if Config.UPDATES_CHANNEL:
       fsub = await handle_force_subscribe(bot, update)
       if fsub == 400:
