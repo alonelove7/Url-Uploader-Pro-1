@@ -47,6 +47,18 @@ async def help_bot(_, m: Message):
     )
 
 @Client.on_message(
+    filters.command("about") & filters.private,
+)
+async def aboutme(_, m: Message):
+    await AddUser(_, m)
+
+    return await m.reply_text(
+        Translation.ABOUT_TEXT,
+        reply_markup=Translation.ABOUT_BUTTONS,
+        disable_web_page_preview=True,
+    )
+
+@Client.on_message(
     filters.private & filters.reply & filters.text
 )
 async def edit_caption(bot, update):
