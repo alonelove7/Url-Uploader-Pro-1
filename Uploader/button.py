@@ -127,9 +127,11 @@ async def youtube_dl_call_back(bot, update):
         ]
     else:
         # command_to_exec = ["yt-dlp", "-f", youtube_dl_format, "--hls-prefer-ffmpeg", "--recode-video", "mp4", "-k", youtube_dl_url, "-o", download_directory]
-        minus_f_format = youtube_dl_format
-        if "youtu" in youtube_dl_url:
-            minus_f_format = youtube_dl_format + "+bestaudio"
+        formats = [
+        "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio",
+        "bestvideo[vcodec^=avc]+bestaudio[acodec^=mp4a]/best[vcodec^=avc]/best",
+        None
+    ]
         command_to_exec = [
             "yt-dlp",
             "-c",
@@ -138,7 +140,7 @@ async def youtube_dl_call_back(bot, update):
             "--embed-subs",
             "--embed-thumbnail",
             "--audio-multistreams", "--video-multistreams",
-            "-f", minus_f_format,
+            "-f", formats,
             "--hls-prefer-ffmpeg", youtube_dl_url,
             "-o", download_directory
         ]
