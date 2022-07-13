@@ -190,6 +190,7 @@ async def echo(bot, update):
         #if "formats" in response_json:
             for formats in response_json["formats"]:
                 format_id = formats.get("format_id")
+                format_ext = "bestvideo[vcodec^=avc]+bestaudio[acodec^=mp4a]/best[vcodec^=avc]/best"
                 #format_string = formats.get("format_note")
                 #if format_string is None:
                     #format_string = formats.get("format")
@@ -212,7 +213,7 @@ async def echo(bot, update):
                 if format_string is not None and not "audio only" in format_string:                
                     ikeyboard = [
                         InlineKeyboardButton(
-                            "🎬 " + format_string + " " + format_ext + " " + approx_file_size + " ",
+                            "🎬 " + format_ext + " " + approx_file_size + " ",
                             callback_data=(cb_string_video).encode("UTF-8")
                         )
                     ]
