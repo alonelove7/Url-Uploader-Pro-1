@@ -75,19 +75,19 @@ async def button(bot, update):
 
 
     elif "|" in update.data:
-        if "cancel" in cb_data.split("|")[0]:
+        if "cancel" in update.data.split("|")[0]:
             try:
-                os.remove(cb_data.split("|")[1])
+                os.remove(update.data.split("|")[1])
                 await bot.edit_message_text(
                     text="Download cancelled!",
                     chat_id=update.message.chat.id,
-                    message_id=update.message.message_id
+                    message_id=update.message.id
                 )
             except:
                 await bot.edit_message_text(
                     text="An error has occurred :(",
                     chat_id=update.message.chat.id,
-                    message_id=update.message.message_id
+                    message_id=update.message.id
                 )
         else:
             await youtube_dl_call_back(bot, update)
