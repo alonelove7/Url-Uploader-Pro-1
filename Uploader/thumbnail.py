@@ -30,7 +30,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, 
 from Uploader.functions.forcesub import handle_force_subscribe
 from Uploader.database.database import db
 from Uploader.config import Config
-from Uploader.database.add import add_user_to_database
+from Uploader.database.database import db
 from Uploader.settings.settings import *
 
 f = filters.command(["delthumb"])
