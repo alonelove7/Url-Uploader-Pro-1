@@ -121,7 +121,7 @@ async def youtube_dl_call_back(bot, update):
             "--prefer-ffmpeg",
             "--extract-audio",
             "--audio-format", youtube_dl_ext,
-            "--audio-quality", youtube_dl_format,
+            "--audio-quality",
             youtube_dl_url,
             "-o", download_directory
         ]
