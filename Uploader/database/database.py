@@ -29,16 +29,17 @@ class Database:
         user = await self.col.find_one({'id': int(id)})
         return True if user else False
 
-
     async def total_users_count(self):
         count = await self.col.count_documents({})
         return count
 
     async def get_all_users(self):
-        return self.col.find({})
+        all_users = self.col.find({})
+        return all_users
 
     async def delete_user(self, user_id):
         await self.col.delete_many({'id': int(user_id)})
+
 
     async def set_apply_caption(self, id, apply_caption):
         await self.col.update_one({'id': id}, {'$set': {'apply_caption': apply_caption}})
