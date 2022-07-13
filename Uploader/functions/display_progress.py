@@ -51,8 +51,13 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
         except:
             pass
 
-
-def humanbytes(size):
+def humanbytes(num: int, suffix='B'):
+    for unit in ['', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi']:
+        if abs(num) < 1024.0:
+            return "%3.1f%s%s" % (num, unit, suffix)
+        num /= 1024.0
+    return "%.1f%s%s" % (num, 'Yi', suffix)
+def huanbytes(size):
     # https://stackoverflow.com/a/49361727/4723940
     # 2**10 = 1024
     if not size:
