@@ -72,7 +72,7 @@ async def edit_caption(bot, update):
 
 
 @Client.on_message(
-    filters.private & filters.command(["addcaption"])
+    filters.private & filters.command(["caption"])
 )
 
 async def add_caption_help(bot, update):
