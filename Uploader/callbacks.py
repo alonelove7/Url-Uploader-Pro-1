@@ -72,25 +72,19 @@ async def button(bot, update):
     elif "close" in update.data:
         await update.message.delete(True)
     
-
+    if cb_data.startswith("cancel"):
+        cmf = cb_data.split("|")
+        chat_id, mes_id, from_usr = cmf[1], cmf[2], cmf[3]
+        if (int(update.from_user.id) == int(from_usr)) or g:
+            await bot.answer_callback_query(
+                update.id, text="Trying to cancel...", show_alert=False
+            )
+            gDict[int(chat_id)].append(int(mes_id))
 
     elif "|" in update.data:
-        if "cancel" in update.data.split("|")[0]:
-            try:
-                os.remove(update.data.split("|")[1])
-                await bot.edit_message_text(
-                    text="Download cancelled!",
-                    chat_id=update.message.chat.id,
-                    message_id=update.message.id
-                )
-            except:
-                await bot.edit_message_text(
-                    text="An error has occurred :(",
-                    chat_id=update.message.chat.id,
-                    message_id=update.message.id
-                )
-        else:
-            await youtube_dl_call_back(bot, update)
+
+
+        await youtube_dl_call_back(bot, update)
 
     elif "=" in update.data:
         await ddl_call_back(bot, update)
