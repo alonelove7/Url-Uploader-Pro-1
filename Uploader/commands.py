@@ -27,7 +27,8 @@ async def start_bot(_, m: Message, lname):
            await db.add_user(m.from_user.id)
 	   await bot.send_message(
 		   Config.LOG_CHANNEL,
-	           f"#NEW_USER: \n\nNew User [{m.from_user.first_name}](tg://user?id={m.from_user.id}) started @{Config.BOT_USERNAME} !!")
+	           f"#NEW_USER: \n\nNew User [{m.from_user.first_name}](tg://user?id={m.from_user.id}) started @{Config.BOT_USERNAME} !!"
+    )
     return await m.reply_text(
         Translation.START_TEXT.format(m.from_user.first_name),
         reply_markup=Translation.START_BUTTONS,
@@ -44,7 +45,8 @@ async def help_bot(_, m: Message):
            await db.add_user(m.from_user.id)
 	   await bot.send_message(
 		   Config.LOG_CHANNEL,
-	           f"#NEW_USER: \n\nNew User [{m.from_user.first_name}](tg://user?id={m.from_user.id}) started @{Config.BOT_USERNAME} !!")
+	           f"#NEW_USER: \n\nNew User [{m.from_user.first_name}](tg://user?id={m.from_user.id}) started @{Config.BOT_USERNAME} !!"
+    )
     return await m.reply_text(
         Translation.HELP_TEXT,
         reply_markup=Translation.HELP_BUTTONS,
@@ -59,7 +61,8 @@ async def edit_caption(bot, update):
            await db.add_user(update.from_user.id)
 	   await bot.send_message(
 		   Config.LOG_CHANNEL,
-	           f"#NEW_USER: \n\nNew User [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started @{Config.BOT_USERNAME} !!")
+	           f"#NEW_USER: \n\nNew User [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started @{Config.BOT_USERNAME} !!"
+    )
     try:
         await bot.send_cached_media(
             chat_id=update.chat.id,
@@ -88,7 +91,8 @@ async def add_caption_help(bot, update):
            await db.add_user(update.from_user.id)
 	   await bot.send_message(
 		   Config.LOG_CHANNEL,
-	           f"#NEW_USER: \n\nNew User [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started @{Config.BOT_USERNAME} !!")
+	           f"#NEW_USER: \n\nNew User [{update.from_user.first_name}](tg://user?id={update.from_user.id}) started @{Config.BOT_USERNAME} !!"
+    )
     await bot.send_message(
         chat_id=update.chat.id,
         text=Translation.ADD_CAPTION_HELP,
