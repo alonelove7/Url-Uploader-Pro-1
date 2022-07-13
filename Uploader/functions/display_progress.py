@@ -15,7 +15,7 @@ SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 
 
 
-def humanbytes(size_in_bytes) -> str:
+def huanbytes(size_in_bytes) -> str:
     if size_in_bytes is None:
         return '0B'
     index = 0
@@ -27,18 +27,17 @@ def humanbytes(size_in_bytes) -> str:
     except IndexError:
         return 'File too large'
 
-def huanbytes(size):
-    # https://stackoverflow.com/a/49361727/4723940
-    # 2**10 = 1024
+def humanbytes(size: int or str):
     if not size:
         return ""
-    power = 2 ** 10
+    power = 2**10
     n = 0
-    Dic_powerN = {0: ' ', 1: 'Ki', 2: 'Mi', 3: 'Gi', 4: 'Ti'}
+    Dic_powerN = {0: " ", 1: "Ki", 2: "Mi", 3: "Gi", 4: "Ti"}
     while size > power:
         size /= power
         n += 1
-    return str(round(size, 2)) + " " + Dic_powerN[n] + 'B'
+    return str(round(size, 2)) + " " + Dic_powerN[n] + "B"
+
 
 
 def TimeFormatter(milliseconds: int) -> str:
