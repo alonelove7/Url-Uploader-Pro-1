@@ -88,11 +88,6 @@ async def add_caption_help(bot, update):
 
 @Client.on_message(filters.private & filters.command("settings"))
 async def settings_handler(bot, update):
-    await update.answer()
-    upload_as_doc = await db.get_upload_as_doc(update.from_user.id)
-    if upload_as_doc:
-        await db.set_upload_as_doc(update.from_user.id, False)
-    else:
-        await db.set_upload_as_doc(update.from_user.id, True)
-    await OpenSettings(update.message)
+
+    await OpenSettings(update.from_user.id)
 
