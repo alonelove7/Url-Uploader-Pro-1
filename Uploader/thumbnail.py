@@ -38,11 +38,7 @@ s = filters.command("showthumb")
 
 @Client.on_message(filters.photo)
 async def save_photo(bot, update):
-    await add_user_to_database(
-        uid=m.from_user.id,
-        fname=m.from_user.first_name,
-        lname=m.from_user.last_name,
-        )
+    await add_user_to_database(bot, update)
     if Config.UPDATES_CHANNEL:
       fsub = await handle_force_subscribe(bot, update)
       if fsub == 400:
@@ -66,11 +62,7 @@ async def save_photo(bot, update):
 
 @Client.on_message(f)
 async def delete_thumbnail(bot, update):
-    await add_user_to_database(
-        uid=update.from_user.id,
-        fname=update.from_user.first_name,
-        lname=update.from_user.last_name,
-        )
+    await add_user_to_database(bot, update)
     if Config.UPDATES_CHANNEL:
       fsub = await handle_force_subscribe(bot, update)
       if fsub == 400:
@@ -94,11 +86,7 @@ async def delete_thumbnail(bot, update):
 
 @Client.on_message(s)
 async def viewthumbnail(bot, update):
-    await add_user_to_database(
-        uid=update.from_user.id,
-        fname=update.from_user.first_name,
-        lname=update.from_user.last_name,
-        )
+    await add_user_to_database(bot, update)
     if Config.UPDATES_CHANNEL:
       fsub = await handle_force_subscribe(bot, update)
       if fsub == 400:
