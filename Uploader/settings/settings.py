@@ -6,7 +6,7 @@ from Uploader.config import Config
 from Uploader.database.database import db
 
 async def OpenSettings(m: "types.Message"):
-    usr_id = m.chat.id
+    #usr_id = m.chat.id
     user_data = await db.get_user_data(usr_id)
     if not user_data:
         await m.edit("Failed to fetch your data from database!")
