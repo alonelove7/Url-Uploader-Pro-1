@@ -86,8 +86,5 @@ async def add_caption_help(bot, update):
     )
 
 
-@Client.on_message(filters.private & filters.command("settings"))
-async def settings_handler(bot, update):
 
-    await OpenSettings(update.from_user.id)
 
