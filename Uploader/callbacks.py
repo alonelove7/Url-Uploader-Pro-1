@@ -72,8 +72,8 @@ async def button(bot, update):
     elif "close" in update.data:
         await update.message.delete(True)
     
-    if cb_data.startswith("cancel"):
-        cmf = cb_data.split("|")
+    if update.data.startswith("cancel"):
+        cmf = update.data.split("|")
         chat_id, mes_id, from_usr = cmf[1], cmf[2], cmf[3]
         if (int(update.from_user.id) == int(from_usr)) or g:
             await bot.answer_callback_query(
