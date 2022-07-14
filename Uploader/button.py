@@ -144,7 +144,7 @@ async def youtube_dl_call_back(bot, update):
             "dash,m3u8:native",
             "-f",
 
-            "--hls-prefer-ffmpeg", youtube_dl_url,
+            youtube_dl_url,
             "-o", download_directory
         ]
     if Config.HTTP_PROXY != "":
