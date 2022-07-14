@@ -197,7 +197,7 @@ async def echo(bot, update):
                 if formats.get('fps'):
                     video_format = f"{formats['height']}p{formats['fps']}-{formats['ext']}"
                 else:
-                    quality = f"{formats['height']}p-{formats['ext']}"
+                    video_format = f"{formats['height']}p-{formats['ext']}"
                 if formats.get('filesize'):
                     size = formats['filesize']
                 elif formats.get('filesize_approx'):
