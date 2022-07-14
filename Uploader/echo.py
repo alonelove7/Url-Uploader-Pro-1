@@ -107,7 +107,7 @@ async def echo(bot, update):
         command_to_exec = [
             "yt-dlp",
             "--no-warnings",
-            "--youtube-skip-dash-manifest",
+            "--skip-unavailable-fragments",
             "-j",
             url,
             "--proxy", Config.HTTP_PROXY
@@ -117,7 +117,7 @@ async def echo(bot, update):
             "yt-dlp",
             "--no-warnings",
        
-            "bestvideo[vcodec^=avc]+bestaudio[acodec^=mp4a]/best[vcodec^=avc]/best",
+            "--skip-unavailable-fragments",
             "-j",
             url
         ]        
@@ -125,7 +125,7 @@ async def echo(bot, update):
         command_to_exec = [
             "yt-dlp",
             "--no-warnings",
-            "--youtube-skip-dash-manifest",
+            "--skip-unavailable-fragments",
             "-j",
             url
         ]
