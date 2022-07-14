@@ -142,7 +142,7 @@ async def youtube_dl_call_back(bot, update):
             
             
             "dash,m3u8:native",
-            "-F", format,
+            "-f",
 
             "--hls-prefer-ffmpeg", youtube_dl_url,
             "-o", download_directory
