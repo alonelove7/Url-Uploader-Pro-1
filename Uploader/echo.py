@@ -204,23 +204,27 @@ async def echo(bot, update):
                     size = formats['filesize_approx']
                 else:
                     size = 0
+                    if fps != '':
+                        video_format = f"bv*[height={height}][fps={fps}][ext={ext}]"
+                    else:
+                        video_format = f"bv*[height={height}][ext={ext}]"
                # approx_file_size = ""
               #  if "filesize" in formats:
                    # approx_file_size = humanbytes(formats["filesize"])
                 cb_string_video = "{}|{}|{}|{}".format(
-                    "video", format_id, format_ext, randem)
+                    "video", video_format, randem)
                 cb_string_file = "{}|{}|{}|{}".format(
-                    "file", format_id, format_ext, randem)
+                    "file", video_format, randem)
                 if not "audio only" in format_string:
                     ikeyboard = [
                         InlineKeyboardButton(
-                            "🎬 " + format_string + " " + format_ext + " " + humanbytes(size) + " ",
+                            "🎬 " + video_format + " " + humanbytes(size) + " ",
                             callback_data=(cb_string_video).encode("UTF-8")
                         )
                     ]
                     """if duration is not None:
                         cb_string_video_message = "{}|{}|{}|{}|{}".format(
-                            "vm", format_id, format_ext, ran, randem)
+                            "vm", video_format, ran, randem)
                         ikeyboard.append(
                             InlineKeyboardButton(
                                 "VM",
@@ -258,12 +262,12 @@ async def echo(bot, update):
                         "✔️ ᴄʟᴏsᴇ", callback_data='close')               
                 ])
         else:
-            format_id = response_json["format_id"]
-            format_ext = response_json["ext"]
+           # format_id = response_json["format_id"]
+            #format_ext = response_json["ext"]
             cb_string_file = "{}|{}|{}|{}".format(
-                "file", format_id, format_ext, randem)
+                "file", video_format, randem)
             cb_string_video = "{}|{}|{}|{}".format(
-                "video", format_id, format_ext, randem)
+                "video", video_format, randem)
             inline_keyboard.append([
                 InlineKeyboardButton(
                     "🎬 sᴍᴇᴅɪᴀ",
@@ -271,9 +275,9 @@ async def echo(bot, update):
                 )
             ])
             cb_string_file = "{}={}={}".format(
-                "file", format_id, format_ext)
+                "file", video_format)
             cb_string_video = "{}={}={}".format(
-                "video", format_id, format_ext)
+                "video", video_format)
             inline_keyboard.append([
                 InlineKeyboardButton(
                     "🎥 ᴠɪᴅᴇᴏ",
