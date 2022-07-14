@@ -92,11 +92,13 @@ async def youtube_dl_call_back(bot, update):
         custom_file_name += '.' + youtube_dl_ext
     logger.info(youtube_dl_url)
     logger.info(custom_file_name)
+    cbv = str(szz) + "//" + str(msd_id)
+    ina = InlineKeyboardMarkup([ [InlineKeyboardButton("Check Progress", callback_data=cbv)], ])
 
     await bot.edit_message_text(
         text=Translation.DOWNLOAD_START.format(custom_file_name),
         chat_id=update.message.chat.id,
-        
+        reply_markup=ina,
         message_id=update.message.id
     )
             
