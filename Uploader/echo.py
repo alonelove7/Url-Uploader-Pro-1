@@ -211,7 +211,7 @@ async def echo(bot, update):
                 if format_string is not None and not "audio only" in format_string:
                     ikeyboard = [
                         InlineKeyboardButton(
-                            "S " + format_string + " video " + humanbytes(approx_file_size) + " ",
+                            "S " + format_string + " video " + humanbytes(size) + " ",
                             callback_data=(cb_string_video).encode("UTF-8")
                         )
                     ]
@@ -231,7 +231,7 @@ async def echo(bot, update):
                         InlineKeyboardButton(
                             "SVideo [" +
                             "] ( " +
-                            approx_file_size + " )",
+                            humanbytes(size) + " )",
                             callback_data=(cb_string_video).encode("UTF-8")
                         ),
                         InlineKeyboardButton(
@@ -267,10 +267,6 @@ async def echo(bot, update):
                 InlineKeyboardButton(
                     "SVideo",
                     callback_data=(cb_string_video).encode("UTF-8")
-                ),
-                InlineKeyboardButton(
-                    "DFile",
-                    callback_data=(cb_string_file).encode("UTF-8")
                 )
             ])
             cb_string_file = "{}={}={}".format(
@@ -281,10 +277,6 @@ async def echo(bot, update):
                 InlineKeyboardButton(
                     "video",
                     callback_data=(cb_string_video).encode("UTF-8")
-                ),
-                InlineKeyboardButton(
-                    "file",
-                    callback_data=(cb_string_file).encode("UTF-8")
                 )
             ])
             # print("Inline Keyboard ---", inline_keyboard, '\n --End Inline Keyboard')
