@@ -185,72 +185,127 @@ async def echo(bot, update):
         # logger.info(response_json)
         inline_keyboard = []
         duration = None
+        duration = None
         if "duration" in response_json:
             duration = response_json["duration"]
+        if "formats" in response_json:
+            for formats in response_json["formats"]:
+                format_id = formats.get("format_id")
+                format_string = formats.get("format_note")
+                if format_string is None:
+                    format_string = formats.get("format")
+                format_ext = formats.get("ext")
 
-        if 'entries' in response_json:
-            for i in ['144', '240', '360', '480', '720', '1080', '1440', '2160']:
-                video_format = f"bv*[height<={i}][ext=mp4]"
-                buttons.sbutton(f"{i}-mp4", f"qu {msg_id} {video_format} t")
-                video_format = f"bv*[height<={i}][ext=webm]"
-                buttons.sbutton(f"{i}-webm", f"qu {msg_id} {video_format} t")
-            buttons.sbutton("Audios", f"qu {msg_id} audio t")
-            buttons.sbutton("Best Videos", f"qu {msg_id} {best_video} t")
-            buttons.sbutton("Best Audios", f"qu {msg_id} {best_audio} t")
-            buttons.sbutton("Cancel", f"qu {msg_id} cancel")
-            YTBUTTONS = InlineKeyboardMarkup(buttons.build_menu(3))
-            listener_dict[msg_id] = [listener, user_id, link, name, YTBUTTONS, args]
-            bmsg = sendMarkup('Choose Playlist Videos Quality:', bot, message, YTBUTTONS)
+                if formats.get('filesize'):
+                    size = formats['filesize']
+                elif frmt.get('filesize_approx'):
+                        
+                    size = formats['filesize_approx']
+                else:
+                    size = 0
+                cb_string_video = "{}|{}|{}|{}".format(
+                    "video", format_id, format_ext, randem)
+                cb_string_file = "{}|{}|{}|{}".format(
+                    "file", format_id, format_ext, randem)
+                if format_string is not None and not "audio only" in format_string:
+                    ikeyboard = [
+                        InlineKeyboardButton(
+                            "🎬 " + format_string + " " + format_ext + " " + approx_file_size + " ",
+                            callback_data=(cb_string_video).encode("UTF-8")
+                        )
+                    ]
+                    """if duration is not None:
+                        cb_string_video_message = "{}|{}|{}|{}|{}".format(
+                            "vm", format_id, format_ext, ran, randem)
+                        ikeyboard.append(
+                            InlineKeyboardButton(
+                                "VM",
+                                callback_data=(
+                                    cb_string_video_message).encode("UTF-8")
+                            )
+                        )"""
+                else:
+                    # special weird case :\
+                    ikeyboard = [
+                        InlineKeyboardButton(
+                            "🎬 [" +
+                            "] ( " +
+                            approx_file_size + " )",
+                            callback_data=(cb_string_video).encode("UTF-8")
+                        )
+                    ]
+                inline_keyboard.append(ikeyboard)
+            if duration is not None:
+                cb_string_64 = "{}|{}|{}|{}".format("audio", "64k", "mp3", randem)
+                cb_string_128 = "{}|{}|{}|{}".format("audio", "128k", "mp3", randem)
+                cb_string = "{}|{}|{}|{}".format("audio", "320k", "mp3", randem)
+                inline_keyboard.append([
+                    InlineKeyboardButton(
+                        "🎵 ᴍᴘ𝟹 " + "(" + "64 ᴋʙᴘs" + ")", callback_data=cb_string_64.encode("UTF-8")),
+                    InlineKeyboardButton(
+                        "🎵 ᴍᴘ𝟹 " + "(" + "128 ᴋʙᴘs" + ")", callback_data=cb_string_128.encode("UTF-8"))
+                ])
+                inline_keyboard.append([
+                    InlineKeyboardButton(
+                        "🎵 ᴍᴘ𝟹 " + "(" + "320 ᴋʙᴘs" + ")", callback_data=cb_string.encode("UTF-8"))
+                ])
+                inline_keyboard.append([                 
+                    InlineKeyboardButton(
+                        "✔️ ᴄʟᴏsᴇ", callback_data='close')               
+                ])
         else:
-            formats = response_json.get('formats')
-            formats_dict = {}
-            if formats is not None:
-                for frmt in formats:
-                    if not frmt.get('tbr') or not frmt.get('height'):
-                        continue
-
-                    if frmt.get('fps'):
-                        quality = f"{frmt['height']}p{frmt['fps']}-{frmt['ext']}"
-                    else:
-                        quality = f"{frmt['height']}p-{frmt['ext']}"
-
-                    if frmt.get('filesize'):
-                        size = frmt['filesize']
-                    elif frmt.get('filesize_approx'):
-                        size = frmt['filesize_approx']
-                    else:
-                        size = 0
-
-                    if quality in list(formats_dict.keys()):
-                        formats_dict[quality][frmt['tbr']] = size
-                    else:
-                        subformat = {}
-                        subformat[frmt['tbr']] = size
-                        formats_dict[quality] = subformat
-
-                for _format in formats_dict:
-                    if len(formats_dict[_format]) == 1:
-                        qual_fps_ext = re_split(r'p|-', _format, maxsplit=2)
-                        height = qual_fps_ext[0]
-                        fps = qual_fps_ext[1]
-                        ext = qual_fps_ext[2]
-                        if fps != '':
-                            video_format = f"bv*[height={height}][fps={fps}][ext={ext}]"
-                        else:
-                            video_format = f"bv*[height={height}][ext={ext}]"
-                        size = list(formats_dict[_format].values())[0]
-                        buttonName = f"{_format} ({get_readable_file_size(size)})"
-                        buttons.sbutton(str(buttonName), f"qu {msg_id} {video_format}")
-                    else:
-                        buttons.sbutton(str(_format), f"qu {msg_id} dict {_format}")
-            buttons.sbutton("Audios", f"qu {msg_id} audio")
-            buttons.sbutton("Best Video", f"qu {msg_id} {best_video}")
-            buttons.sbutton("Best Audio", f"qu {msg_id} {best_audio}")
-            buttons.sbutton("Cancel", f"qu {msg_id} cancel")
-            YTBUTTONS = InlineKeyboardMarkup(buttons.build_menu(2))
-            listener_dict[msg_id] = [listener, user_id, link, name, YTBUTTONS, args, formats_dict]
-            bmsg = sendMarkup('Choose Video Quality:', bot, message, YTBUTTONS)
-
-
+            format_id = response_json["format_id"]
+            format_ext = response_json["ext"]
+            cb_string_file = "{}|{}|{}|{}".format(
+                "file", format_id, format_ext, randem)
+            cb_string_video = "{}|{}|{}|{}".format(
+                "video", format_id, format_ext, randem)
+            inline_keyboard.append([
+                InlineKeyboardButton(
+                    "🎬 sᴍᴇᴅɪᴀ",
+                    callback_data=(cb_string_video).encode("UTF-8")
+                )
+            ])
+            cb_string_file = "{}={}={}".format(
+                "file", format_id, format_ext)
+            cb_string_video = "{}={}={}".format(
+                "video", format_id, format_ext)
+            inline_keyboard.append([
+                InlineKeyboardButton(
+                    "🎥 ᴠɪᴅᴇᴏ",
+                    callback_data=(cb_string_video).encode("UTF-8")
+                )
+            ])
+        reply_markup = InlineKeyboardMarkup(inline_keyboard)
+        await chk.delete()
+        await bot.send_message(
+            chat_id=update.chat.id,
+            text=Translation.FORMAT_SELECTION.format(Thumbnail) + "\n" + Translation.SET_CUSTOM_USERNAME_PASSWORD,
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML,
+            reply_to_message_id=update.id
+        )
+    else:
+        # fallback for nonnumeric port a.k.a seedbox.io
+        inline_keyboard = []
+        cb_string_file = "{}={}={}".format(
+            "file", "LFO", "NONE")
+        cb_string_video = "{}={}={}".format(
+            "video", "OFL", "ENON")
+        inline_keyboard.append([
+            InlineKeyboardButton(
+                "🎬 ᴍᴇᴅɪᴀ",
+                callback_data=(cb_string_video).encode("UTF-8")
+            )
+        ])
+        reply_markup = InlineKeyboardMarkup(inline_keyboard)
+        await chk.delete(True)
+        await bot.send_message(
+            chat_id=update.chat.id,
+            text=Translation.FORMAT_SELECTION,
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML,
+            reply_to_message_id=update.id
+        )
 
 
