@@ -198,7 +198,14 @@ async def echo(bot, update):
     # vcodec='none' means there is no video
     best_audio = next(f for f in formats if (
         f['acodec'] != 'none' and f['vcodec'] == 'none' and f['ext'] == audio_ext))
-
+    # These are the minimum required fields for a merged format
+    yield {
+        'format_id': f'{best_video["format_id"]}+{best_audio["format_id"]}',
+        'ext': best_video['ext'],
+        'requested_formats': [best_video, best_audio],
+        # Must be + separated list of protocols
+        'protocol': f'{best_video["protocol"]}+{best_audio["protocol"]}'
+    }
                 if formats.get('filesize'):
                     size = formats['filesize']
                 elif formats.get('filesize_approx'):
