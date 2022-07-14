@@ -31,7 +31,12 @@ async def youtube_dl_call_back(bot, update):
     cb_data = update.data
     # youtube_dl extractors
     tg_send_type, youtube_dl_format, youtube_dl_ext, ranom = cb_data.split("|")
-    print(cb_data)
+    szz, msd_id = sz.rsplit(' ', 1)
+    try:
+        int(szz)
+    except:
+        pass
+    print(cb_data, msd_id)
     random1 = random_char(5)
     
     save_ytdl_json_path = Config.DOWNLOAD_LOCATION + \
