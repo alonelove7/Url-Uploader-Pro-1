@@ -142,7 +142,7 @@ async def youtube_dl_call_back(bot, update):
             "--config-locations", "--exec",
             "--merge-output-format",
             "dash,m3u8:native",
-            "-f", format + "--formats",
+            "-F", format,
 
             "--hls-prefer-ffmpeg", youtube_dl_url,
             "-o", download_directory
