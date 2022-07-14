@@ -108,7 +108,7 @@ async def youtube_dl_call_back(bot, update):
     cbv = str(szz) + "//" + str(msd_id)
     ina = InlineKeyboardMarkup([ [InlineKeyboardButton("Check Progress", callback_data=cbv)], ])
     await bot.edit_message_text(
-        caption=Translation.DOWNLOAD_START,
+        text=Translation.DOWNLOAD_START,
         chat_id=update.message.chat.id,
         message_id=update.message.id,
         reply_markup=ina
@@ -241,7 +241,7 @@ async def youtube_dl_call_back(bot, update):
                 message_id=update.message.id
             )
 
-            start_time = time.time()
+            #start_time = time.time()
        
             start_time = time.time()
 
