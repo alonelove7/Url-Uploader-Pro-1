@@ -126,7 +126,18 @@ async def youtube_dl_call_back(bot, update):
             "-c",
             "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
             "--embed-subs",
-            "-f", "bestvideo[vcodec^=avc]+bestaudio[acodec^=mp4a]/best[vcodec^=avc]/best", "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio",
+            "-f", "bestvideo[vcodec^=avc]+bestaudio[acodec^=mp4a]/best[vcodec^=avc]/best",
+            "--hls-prefer-ffmpeg", youtube_dl_url,
+            "-o", download_directory
+        ]
+    else:
+
+        command_to_exec = [
+            "yt-dlp",
+            "-c",
+            "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
+            "--embed-subs",
+            "-f", "bestvideo[vcodec^=avc]+bestaudio[acodec^=mp4a]/best[vcodec^=avc]/best",
             "--hls-prefer-ffmpeg", youtube_dl_url,
             "-o", download_directory
         ]
