@@ -184,7 +184,16 @@ async def echo(bot, update):
             json.dump(response_json, outfile, ensure_ascii=False)
         # logger.info(response_json)
         inline_keyboard = []
-
+        duration = None
+        if "duration" in response_json:
+            duration = response_json["duration"]
+        if "formats" in response_json:
+            for formats in response_json["formats"]:
+                format_id = formats.get("format_id")
+                format_string = formats.get("format_note")
+                if format_string is None:
+                    format_string = formats.get("format")
+                format_ext = formats.get("ext")
                 if formats.get('filesize'):
                     size = formats['filesize']
                 elif formats.get('filesize_approx'):
