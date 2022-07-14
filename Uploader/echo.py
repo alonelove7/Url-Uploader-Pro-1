@@ -105,7 +105,7 @@ async def echo(bot, update):
                 url = url[o:o + l]
     if Config.HTTP_PROXY != "":
         command_to_exec = [
-            "ytdl-patched",
+            "yt-dlp",
             "--no-warnings",
             "--skip-unavailable-fragments",
             "-j",
@@ -114,7 +114,7 @@ async def echo(bot, update):
         ]
     elif "/sonyliv/" in url:
         command_to_exec = [
-            "ytdl-patched",
+            "yt-dlp",
             "--no-warnings",
        
             "--skip-unavailable-fragments",
@@ -123,7 +123,7 @@ async def echo(bot, update):
         ]        
     else:
         command_to_exec = [
-            "ytdl-patched",
+            "yt-dlp",
             "--no-warnings",
             "--skip-unavailable-fragments",
             "-j",
