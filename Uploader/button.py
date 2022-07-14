@@ -109,7 +109,7 @@ async def youtube_dl_call_back(bot, update):
     command_to_exec = []
     if tg_send_type == "audio":
         command_to_exec = [
-            "yt-dlp",
+            "ytdl-patched",
             "-c",
             "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
             "--prefer-ffmpeg",
@@ -122,7 +122,7 @@ async def youtube_dl_call_back(bot, update):
     elif "youtu" in youtube_dl_url:
         
         command_to_exec = [
-            "yt-dlp",
+            "ytdl-patched",
             "-c",
             "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
             "--embed-subs",
@@ -135,7 +135,7 @@ async def youtube_dl_call_back(bot, update):
         if "sonyliv" in youtube_dl_url:
             format = "bestvideo[vcodec^=avc]+bestaudio[acodec^=mp4a]/best[vcodec^=avc]/best"
         command_to_exec = [
-            "yt-dlp",
+            "ytdl-patched",
             "-c",
             "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
             "--embed-subs",
