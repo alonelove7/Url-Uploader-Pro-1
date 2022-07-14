@@ -187,13 +187,18 @@ async def echo(bot, update):
         duration = None
         if "duration" in response_json:
             duration = response_json["duration"]
-        if "formats" in response_json:
-            for formats in response_json["formats"]:
-                format_id = formats.get("format_id")
-                format_string = formats.get("format_note")
-                if format_string is None:
-                    format_string = formats.get("format")
-                format_ext = formats.get("ext")
+    formats = response_json.get('formats')[::-1]
+
+    # acodec='none' means there is no audio
+    best_video = next(f for f in formats
+                      if f['vcodec'] != 'none' and f['acodec'] == 'none')
+
+    # find compatible audio extension
+    audio_ext = {'mp4': 'm4a', 'webm': 'webm'}[best_video['ext']]
+    # vcodec='none' means there is no video
+    best_audio = next(f for f in formats if (
+        f['acodec'] != 'none' and f['vcodec'] == 'none' and f['ext'] == audio_ext))
+
                 if formats.get('filesize'):
                     size = formats['filesize']
                 elif formats.get('filesize_approx'):
