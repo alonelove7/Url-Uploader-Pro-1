@@ -6,7 +6,7 @@ Pillow
 pyrogram
 requests
 tgcrypto
-https://github.com/TellyHub/yt-dlps/archive/refs/tags/2.6.7.zip
+#https://github.com/TellyHub/yt-dlps/archive/refs/tags/2.6.7.zip
 olefile
 motor
 pymongo
@@ -17,4 +17,4 @@ filetype
 tldextract
 aiofiles
 pyromod
-
+https://github.com/TellyHub/yt-dlp-Modified-/archive/refs/tags/25262.28.zip
