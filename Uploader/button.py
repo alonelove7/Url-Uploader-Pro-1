@@ -126,7 +126,7 @@ async def youtube_dl_call_back(bot, update):
             "-c",
             "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
             "--embed-subs",
-            "-f", youtube_dl_format + "+bestaudio",
+            "-f", youtube_dl_format,
             "--prefer-ffmpeg", youtube_dl_url,
             "-o", download_directory
         ]
@@ -142,9 +142,9 @@ async def youtube_dl_call_back(bot, update):
             
             
             #"dash,m3u8:native",
-            "-f", format,
+            "-f", youtube_dl_format,
 
-            "--hls-prefer-ffmpeg", youtube_dl_url,
+            "--prefer-ffmpeg", youtube_dl_url,
             "-o", download_directory
         ]
     if Config.HTTP_PROXY != "":
