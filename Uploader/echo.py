@@ -204,8 +204,92 @@ async def echo(bot, update):
                     size = formats['filesize_approx']
                 else:
                     size = 0
-
+                cb_string_video = "{}|{}|{}|{}".format(
+                    "video", format_id, format_ext, str(approx_file_size) + idd_m)
+                cb_string_file = "{}|{}|{}|{}".format(
+                    "file", format_id, format_ext, str(approx_file_size) + idd_m)
+                if format_string is not None and not "audio only" in format_string:
+                    ikeyboard = [
+                        InlineKeyboardButton(
+                            "S " + format_string + " video " + humanbytes(approx_file_size) + " ",
+                            callback_data=(cb_string_video).encode("UTF-8")
+                        )
+                    ]
+                    """if duration is not None:
+                        cb_string_video_message = "{}|{}|{}|{}|{}".format(
+                            "vm", format_id, format_ext, ran, randem)
+                        ikeyboard.append(
+                            InlineKeyboardButton(
+                                "VM",
+                                callback_data=(
+                                    cb_string_video_message).encode("UTF-8")
+                            )
+                        )"""
+                else:
+                    # special weird case :\
+                    ikeyboard = [
+                        InlineKeyboardButton(
+                            "SVideo [" +
+                            "] ( " +
+                            approx_file_size + " )",
+                            callback_data=(cb_string_video).encode("UTF-8")
+                        ),
+                        InlineKeyboardButton(
+                            "DFile [" +
+                            "] ( " +
+                            approx_file_size + " )",
+                            callback_data=(cb_string_file).encode("UTF-8")
+                        )
+                    ]
+                inline_keyboard.append(ikeyboard)
+            if duration is not None:
+                cb_string_64 = "{}|{}|{}|{}".format("audio", "64k", "mp3", no_sz)
+                cb_string_128 = "{}|{}|{}|{}".format("audio", "128k", "mp3", no_sz)
+                cb_string = "{}|{}|{}|{}".format("audio", "320k", "mp3", no_sz)
+                inline_keyboard.append([
+                    InlineKeyboardButton(
+                        "MP3 " + "(" + "64 kbps" + ")", callback_data=cb_string_64.encode("UTF-8")),
+                    InlineKeyboardButton(
+                        "MP3 " + "(" + "128 kbps" + ")", callback_data=cb_string_128.encode("UTF-8"))
+                ])
+                inline_keyboard.append([
+                    InlineKeyboardButton(
+                        "MP3 " + "(" + "320 kbps" + ")", callback_data=cb_string.encode("UTF-8"))
+                ])
+        else:
+            format_id = response_json["format_id"]
+            format_ext = response_json["ext"]
+            cb_string_file = "{}|{}|{}|{}".format(
+                "file", format_id, format_ext, no_sz)
+            cb_string_video = "{}|{}|{}|{}".format(
+                "video", format_id, format_ext, no_sz)
+            inline_keyboard.append([
+                InlineKeyboardButton(
+                    "SVideo",
+                    callback_data=(cb_string_video).encode("UTF-8")
+                ),
+                InlineKeyboardButton(
+                    "DFile",
+                    callback_data=(cb_string_file).encode("UTF-8")
+                )
+            ])
+            cb_string_file = "{}={}={}".format(
+                "file", format_id, format_ext)
+            cb_string_video = "{}={}={}".format(
+                "video", format_id, format_ext)
+            inline_keyboard.append([
+                InlineKeyboardButton(
+                    "video",
+                    callback_data=(cb_string_video).encode("UTF-8")
+                ),
+                InlineKeyboardButton(
+                    "file",
+                    callback_data=(cb_string_file).encode("UTF-8")
+                )
+            ])
+            # print("Inline Keyboard ---", inline_keyboard, '\n --End Inline Keyboard')
         reply_markup = InlineKeyboardMarkup(inline_keyboard)
+        #reply_markup = InlineKeyboardMarkup(inline_keyboard)
         await chk.delete()
         await bot.send_message(
             chat_id=update.chat.id,
