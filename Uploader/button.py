@@ -133,6 +133,7 @@ async def youtube_dl_call_back(bot, update):
             "-o", download_directory
         ]
     else:
+        minus_f_format = youtube_dl_format
         if "sonyliv" in youtube_dl_url:
             format = "bestvideo[vcodec^=avc]+bestaudio[acodec^=mp4a]/best[vcodec^=avc]/best"
         command_to_exec = [
