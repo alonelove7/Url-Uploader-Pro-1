@@ -95,7 +95,7 @@ async def button(bot, update):
             print(fc)
     elif "NO-delM" in update.data:
         await bot.edit_message_text(chat_id=update.message.chat.id, message_id=update.message.id, text=f"Media file is not deleted.")
-    elif "//" in cb_data:
+    elif "//" in update.data:
         szze, ms_id = update.data.rsplit('//')
         download_directory = Config.DOWNLOAD_LOCATION + "/" + str(ms_id)
         smze, vtt = 0, 0
