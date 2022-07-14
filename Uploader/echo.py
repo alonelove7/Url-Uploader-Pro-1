@@ -198,7 +198,7 @@ async def echo(bot, update):
 
                 if formats.get('filesize'):
                     size = formats['filesize']
-                elif frmt.get('filesize_approx'):
+                elif formats.get('filesize_approx'):
                         
                     size = formats['filesize_approx']
                 else:
@@ -210,7 +210,7 @@ async def echo(bot, update):
                 if format_string is not None and not "audio only" in format_string:
                     ikeyboard = [
                         InlineKeyboardButton(
-                            "🎬 " + format_string + " " + format_ext + " " + approx_file_size + " ",
+                            "🎬 " + format_string + " " + format_ext + " " + size + " ",
                             callback_data=(cb_string_video).encode("UTF-8")
                         )
                     ]
@@ -230,7 +230,7 @@ async def echo(bot, update):
                         InlineKeyboardButton(
                             "🎬 [" +
                             "] ( " +
-                            approx_file_size + " )",
+                            size + " )",
                             callback_data=(cb_string_video).encode("UTF-8")
                         )
                     ]
@@ -282,7 +282,7 @@ async def echo(bot, update):
             chat_id=update.chat.id,
             text=Translation.FORMAT_SELECTION.format(Thumbnail) + "\n" + Translation.SET_CUSTOM_USERNAME_PASSWORD,
             reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML,
+           # parse_mode=enums.ParseMode.HTML,
             reply_to_message_id=update.id
         )
     else:
@@ -304,7 +304,7 @@ async def echo(bot, update):
             chat_id=update.chat.id,
             text=Translation.FORMAT_SELECTION,
             reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML,
+          #  parse_mode=enums.ParseMode.HTML,
             reply_to_message_id=update.id
         )
 
