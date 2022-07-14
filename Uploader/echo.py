@@ -189,7 +189,7 @@ async def echo(bot, update):
             duration = response_json["duration"]
         if "formats" in response_json:
             for formats in response_json["formats"]:
-                format_id = formats.get("format_id")[::-1]
+                format_id = formats.get("format_id")
                 format_string = formats.get("format_note")
                 if format_string is None:
                     format_string = formats.get("format")
