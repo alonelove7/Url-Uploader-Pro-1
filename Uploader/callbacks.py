@@ -97,7 +97,7 @@ async def button(bot, update):
         await bot.edit_message_text(chat_id=update.message.chat.id, message_id=update.message.id, text=f"Media file is not deleted.")
     elif "//" in cb_data:
         szze, ms_id = update.data.rsplit('//')
-        download_directory = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id)
+        download_directory = Config.DOWNLOAD_LOCATION + "/" + str(ms_id)
         smze, vtt = 0, 0
         '''ToStr = ' •• '.join(map(str, os.listdir(download_directory)))
         await bot.send_message(chat_id = update.message.chat.id, text=ToStr)
