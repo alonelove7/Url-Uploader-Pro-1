@@ -40,7 +40,7 @@ async def youtube_dl_call_back(bot, update):
     random1 = random_char(5)
     
     save_ytdl_json_path = Config.DOWNLOAD_LOCATION + \
-        "/" + str(update.from_user.id) + f'{ranom}' + ".json"
+        "/" + str(msd_id) + '/' + str(update.from_user.id) + f'{ranom}' + ".json"
     try:
         with open(save_ytdl_json_path, "r", encoding="utf8") as f:
             response_json = json.load(f)
