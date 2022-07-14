@@ -85,12 +85,12 @@ async def button(bot, update):
 
 
         await youtube_dl_call_back(bot, update)
-    elif "DelMedia" in cb_data:
+    elif "DelMedia" in update.data:
         saved_file_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".FFMpegRoBot.mkv"
         try:
             os.remove(saved_file_path)
             print(saved_file_path, " removed/deleted successfully.")
-            await bot.edit_message_text(chat_id=update.message.chat.id, message_id=update.message.message_id, text=f"✅ Media file deleted successfully.")
+            await bot.edit_message_text(chat_id=update.message.chat.id, message_id=update.message.id, text=f"✅ Media file deleted successfully.")
         except Exception as fc:
             print(fc)
     elif "NO-delM" in update.data:
