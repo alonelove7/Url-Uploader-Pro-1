@@ -6,7 +6,7 @@ Pillow
 pyrogram
 requests
 tgcrypto
-yt-dlp
+https://github.com/ytdl-patched/ytdl-patched/archive/refs/tags/2022.07.14.1657759735.zip
 olefile
 motor
 pymongo
