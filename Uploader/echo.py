@@ -195,7 +195,7 @@ async def echo(bot, update):
                     format_string = formats.get("format")
                 format_ext = formats.get("ext")
                 if formats.get('fps'):
-                    quality = f"{formats['height']}p{formats['fps']}-{formats['ext']}"
+                    video_format = f"{formats['height']}p{formats['fps']}-{formats['ext']}"
                 else:
                     quality = f"{formats['height']}p-{formats['ext']}"
                 if formats.get('filesize'):
@@ -204,10 +204,7 @@ async def echo(bot, update):
                     size = formats['filesize_approx']
                 else:
                     size = 0
-                    if fps != '':
-                        video_format = f"bv*[height={height}][fps={fps}][ext={ext}]"
-                    else:
-                        video_format = f"bv*[height={height}][ext={ext}]"
+
                # approx_file_size = ""
               #  if "filesize" in formats:
                    # approx_file_size = humanbytes(formats["filesize"])
