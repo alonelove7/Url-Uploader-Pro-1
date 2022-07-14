@@ -31,16 +31,16 @@ async def youtube_dl_call_back(bot, update):
     cb_data = update.data
     # youtube_dl extractors
     tg_send_type, youtube_dl_format, youtube_dl_ext, ranom = cb_data.split("|")
-    szz, msd_id = ranom.rsplit(' ', 1)
+    szz
     try:
         int(szz)
     except:
         pass
-    print(cb_data, msd_id)
+    print(cb_data)
     random1 = random_char(5)
     
     save_ytdl_json_path = Config.DOWNLOAD_LOCATION + \
-        "/" + str(msd_id) + '/' + str(update.from_user.id) + f'{ranom}' + ".json"
+        "/" + str(update.from_user.id) + f'{ranom}' + ".json"
     try:
         with open(save_ytdl_json_path, "r", encoding="utf8") as f:
             response_json = json.load(f)
@@ -97,7 +97,7 @@ async def youtube_dl_call_back(bot, update):
         custom_file_name += '.' + youtube_dl_ext
     logger.info(youtube_dl_url)
     logger.info(custom_file_name)
-    cbv = str(szz) + "//" + str(msd_id)
+    cbv = str(szz) + "//" + str(update.from_user.id)
     ina = InlineKeyboardMarkup([ [InlineKeyboardButton("Check Progress", callback_data=cbv)], ])
 
     await bot.edit_message_text(
