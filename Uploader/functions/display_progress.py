@@ -56,7 +56,7 @@ SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 
 
 
-def huanbytes(size_in_bytes) -> str:
+def humanbytes(size_in_bytes) -> str:
     if size_in_bytes is None:
         return '0B'
     index = 0
@@ -68,7 +68,7 @@ def huanbytes(size_in_bytes) -> str:
     except IndexError:
         return 'File too large'
 
-def humanbytes(size: int or str):
+def hnbytes(size: int or str):
     if not size:
         return ""
     power = 2**10
