@@ -187,6 +187,8 @@ async def echo(bot, update):
         duration = None
         if "duration" in response_json:
             duration = response_json["duration"]
+            for i in ['144', '240', '360', '480', '720', '1080', '1440', '2160']:
+                video_format = f"bv*[height<={i}][ext=mp4]"
         if "formats" in response_json:
             for formats in response_json["formats"]:
                 format_id = formats.get("format_id")
