@@ -56,7 +56,7 @@ SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 
 
 
-def humanbytes(size_in_bytes) -> str:
+def huanbytes(size_in_bytes) -> str:
     if size_in_bytes is None:
         return '0B'
     index = 0
@@ -68,12 +68,12 @@ def humanbytes(size_in_bytes) -> str:
     except IndexError:
         return 'File too large'
 
-def hnbytes(size: int or str):
+def humanbytes(size: int or str):
     if not size:
         return ""
     power = 2**10
     n = 0
-    Dic_powerN = {0: " ", 1: "Ki", 2: "Mi", 3: "Gi", 4: "Ti"}
+    Dic_powerN = {0: " ", 1: "K", 2: "M", 3: "G", 4: "T"}
     while size > power:
         size /= power
         n += 1
