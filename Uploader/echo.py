@@ -207,8 +207,8 @@ async def echo(bot, update):
                     "video", format_id, format_ext, randem)
                 cb_string_file = "{}|{}|{}|{}".format(
                     "file", format_id, format_ext, randem)
-                if "DASH" in format_string.upper():
-                    ikeyboard = [
+                
+                ikeyboard = [
                         InlineKeyboardButton(
                             "🎬 " + format_string + " " + format_ext + " " + humanbytes(size) + " ",
                             callback_data=(cb_string_video).encode("UTF-8")
