@@ -194,6 +194,10 @@ async def echo(bot, update):
                 if format_string is None:
                     format_string = formats.get("format")
                 format_ext = formats.get("ext")
+                if formats.get('fps'):
+                    quality = f"{formats['height']}p{formats['fps']}-{formats['ext']}"
+                else:
+                    quality = f"{formats['height']}p-{formats['ext']}"
                 if formats.get('filesize'):
                     size = formats['filesize']
                 elif formats.get('filesize_approx'):
