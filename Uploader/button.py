@@ -141,7 +141,7 @@ async def youtube_dl_call_back(bot, update):
             "--embed-subs",
             
             
-            "dash,m3u8:native",
+            #"dash,m3u8:native",
             "-f", format,
 
             "--hls-prefer-ffmpeg", youtube_dl_url,
