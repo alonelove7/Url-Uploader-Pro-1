@@ -31,7 +31,7 @@ async def youtube_dl_call_back(bot, update):
     cb_data = update.data
     # youtube_dl extractors
     tg_send_type, youtube_dl_format, youtube_dl_ext, ranom = cb_data.split("|")
-    szz, msd_id = sz.rsplit(' ', 1)
+    szz, msd_id = ranom.rsplit(' ', 1)
     try:
         int(szz)
     except:
