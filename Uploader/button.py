@@ -119,7 +119,7 @@ async def youtube_dl_call_back(bot, update):
             youtube_dl_url,
             "-o", download_directory
         ]
-    elif
+    elif "youtu" in url:
         minus_f_format = youtube_dl_format
         if "youtu" in youtube_dl_url:
             minus_f_format = youtube_dl_format + "+bestaudio"
