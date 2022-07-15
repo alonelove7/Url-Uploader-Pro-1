@@ -197,7 +197,11 @@ async def echo(bot, update):
                 format_string = formats.get("format_note")
                 if format_string is None:
                     format_string = formats.get("format")
+                if "DASH" in format_string.upper()
+                    continue
+                
                 format_ext = formats.get("ext")
+
 
                 if formats.get('filesize'):
                     size = formats['filesize']
@@ -205,7 +209,7 @@ async def echo(bot, update):
                     size = formats['filesize_approx']
                 else:
                     size = 0
-                if "DASH" in format_string.upper()
+
                 cb_string_video = "{}|{}|{}|{}".format(
                     "video", format_id, format_ext, randem)
                 cb_string_file = "{}|{}|{}|{}".format(
