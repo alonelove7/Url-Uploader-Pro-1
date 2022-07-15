@@ -59,7 +59,7 @@ async def echo(bot, update):
       fsub = await handle_force_subscribe(bot, update)
       if fsub == 400:
         return
-
+    chk = await update.reply_text(text=Translation.CHECK_LINK, quote=True)
     if str(update.from_user.id) in Config.ADL_BOT_RQ:
         current_time = time.time()
         previous_time = Config.ADL_BOT_RQ[str(update.from_user.id)]
@@ -72,7 +72,7 @@ async def echo(bot, update):
     else:
         Config.ADL_BOT_RQ[str(update.from_user.id)] = time.time()
 
-    chk = await update.reply_text(text=Translation.CHECK_LINK, quote=True)
+
     logger.info(update.from_user)
     url = update.text
     youtube_dl_username = None
