@@ -133,7 +133,7 @@ async def youtube_dl_call_back(bot, update):
     else:
         
         if "sonyliv" in youtube_dl_url:
-            format = "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio"
+            format = "bestvideo[vcodec^=avc]+bestaudio[acodec^=mp4a]/best[vcodec^=avc]/best"
         command_to_exec = [
             "yt-dlp",
             "-c",
@@ -141,7 +141,7 @@ async def youtube_dl_call_back(bot, update):
             "--embed-subs",
             
             
-            #"dash,m3u8:native",
+            
             "-f", format,
 
             "--prefer-ffmpeg", youtube_dl_url,
