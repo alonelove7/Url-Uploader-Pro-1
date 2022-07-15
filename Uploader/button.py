@@ -133,20 +133,16 @@ async def youtube_dl_call_back(bot, update):
         ]
     else:
         
-        if "sonyliv" in youtube_dl_url:
-            format = "bestvideo[vcodec^=avc]+bestaudio[acodec^=mp4a]/best[vcodec^=avc]/best"
+        minus_f_format = youtube_dl_format
+        if "youtu" in youtube_dl_url:
+            minus_f_format = f"{youtube_dl_format}+bestaudio"
         command_to_exec = [
             "yt-dlp",
             "-c",
-            
             "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
             "--embed-subs",
-            
-            
-            
-            "-f", format, 
-
-            "--prefer-ffmpeg", youtube_dl_url,
+            "-f", minus_f_format,
+            "--hls-prefer-ffmpeg", youtube_dl_url,
             "-o", download_directory
         ]
     if Config.HTTP_PROXY != "":
