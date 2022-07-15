@@ -205,6 +205,7 @@ async def echo(bot, update):
                     size = formats['filesize_approx']
                 else:
                     size = 0
+                if "DASH" in format_string.upper()
                 cb_string_video = "{}|{}|{}|{}".format(
                     "video", format_id, format_ext, randem)
                 cb_string_file = "{}|{}|{}|{}".format(
