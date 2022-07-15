@@ -24,6 +24,12 @@ class Config(object):
     BANNED_USERS = set(int(x) for x in os.environ.get("BANNED_USERS", "").split())
     # the download location, where the HTTP Server runs
     DOWNLOAD_LOCATION = "./DOWNLOADS"
+    try:
+        TIME_GAP = int(os.environ.get("TIME_GAP", "")) if os.environ.get("TIME_GAP", "") else None
+    except:
+        TIME_GAP = None
+        logger.warning("Give the timegap in seconds. Dont use letters 😑")
+    TIME_GAP_STORE = {}
     # Update channel for Force Subscribe
     UPDATE_CHANNEL = os.environ.get("UPDATE_CHANNEL", "")
     # Telegram maximum file upload size
