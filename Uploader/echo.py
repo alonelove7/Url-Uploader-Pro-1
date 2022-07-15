@@ -132,9 +132,8 @@ async def echo(bot, update):
         command_to_exec = [
             "yt-dlp",
             "--no-warnings",
-            #"--youtube-skip-dash-manifest",
-            "--allow-unplayable-formats",
-            
+            "skip",
+            "--allow-dynamic-mpd",
             "-j",
             url
         ]        
@@ -200,8 +199,8 @@ async def echo(bot, update):
                 format_string = formats.get("format_note")
                 if format_string is None:
                     format_string = formats.get("format")
-                if "DASH" in format_string.upper():
-                    continue
+                #if "DASH" in format_string.upper():
+                #    continue
                 
                 format_ext = formats.get("ext")
 
