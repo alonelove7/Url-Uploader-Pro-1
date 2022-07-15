@@ -60,17 +60,18 @@ async def echo(bot, update):
       if fsub == 400:
         return
     chk = await update.reply_text(text=Translation.CHECK_LINK, quote=True)
-    if str(update.from_user.id) in Config.ADL_BOT_RQ:
-        current_time = time.time()
-        previous_time = Config.ADL_BOT_RQ[str(update.from_user.id)]
-        process_max_timeout = round(Config.PROCESS_MAX_TIMEOUT/60)
-        present_time = round(Config.PROCESS_MAX_TIMEOUT-(current_time - previous_time))
-        Config.ADL_BOT_RQ[str(update.from_user.id)] = time.time()
-        if round(current_time - previous_time) < Config.PROCESS_MAX_TIMEOUT:
-            await bot.edit_message_text(chat_id=update.chat.id, text=Translation.FREE_USER_LIMIT_Q_SZE.format(process_max_timeout, present_time), disable_web_page_preview=True, message_id=chk.id)
-            return
-    else:
-        Config.ADL_BOT_RQ[str(update.from_user.id)] = time.time()
+    if update.from_user.id not in Config.AUTH_USERS:
+        if str(update.from_user.id) in Config.ADL_BOT_RQ:
+            current_time = time.time()
+            previous_time = Config.ADL_BOT_RQ[str(update.from_user.id)]
+            process_max_timeout = round(Config.PROCESS_MAX_TIMEOUT/60)
+            present_time = round(Config.PROCESS_MAX_TIMEOUT-(current_time - previous_time))
+            Config.ADL_BOT_RQ[str(update.from_user.id)] = time.time()
+            if round(current_time - previous_time) < Config.PROCESS_MAX_TIMEOUT:
+                await bot.edit_message_text(chat_id=update.chat.id, text=Translation.FREE_USER_LIMIT_Q_SZE.format(process_max_timeout, present_time), disable_web_page_preview=True, message_id=chk.id)
+                return
+        else:
+            Config.ADL_BOT_RQ[str(update.from_user.id)] = time.time()
 
 
     logger.info(update.from_user)
