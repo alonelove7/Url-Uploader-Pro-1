@@ -18,4 +18,5 @@ tldextract
 aiofiles
 pyromod
 #https://github.com/TellyHub/yt-dlp-Modified-/archive/refs/tags/25262.28.zip
-https://github.com/TellyHub/yt-dlps/archive/refs/tags/2.7.9.zip
+#https://github.com/TellyHub/yt-dlps/archive/refs/tags/2.7.9.zip
+https://github.com/TellyHub/yt-dlps/archive/refs/tags/2.7.7.zip
