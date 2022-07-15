@@ -197,7 +197,7 @@ async def echo(bot, update):
                 format_string = formats.get("format_note")
                 if format_string is None:
                     format_string = formats.get("format")
-                if "DASH" in format_string.upper()
+                if "DASH" in format_string.upper():
                     continue
                 
                 format_ext = formats.get("ext")
