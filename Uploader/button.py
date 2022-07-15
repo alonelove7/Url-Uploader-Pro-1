@@ -144,7 +144,7 @@ async def youtube_dl_call_back(bot, update):
             
             
             
-            "-f", format + "--prefer-free-formats", 
+            "-f", format, 
 
             "--prefer-ffmpeg", youtube_dl_url,
             "-o", download_directory
