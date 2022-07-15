@@ -134,7 +134,7 @@ async def echo(bot, update):
             "--no-warnings",
             "--youtube-skip-dash-manifest",
             "--youtube-skip-hls-manifest",
-            "--allow-dynamic-mpd",
+            
             "-j",
             url
         ]        
