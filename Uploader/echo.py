@@ -10,10 +10,14 @@ logger = logging.getLogger(__name__)
 import requests, urllib.parse, filetype, os, time, shutil, tldextract, asyncio, json, math
 from PIL import Image
 from Uploader.config import Config
-import time
+
 from Uploader.script import Translation
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 from pyrogram import filters
+import os
+import time
+import random
+import asyncio
 from pyrogram import Client, enums
 from Uploader.functions.forcesub import handle_force_subscribe
 from Uploader.functions.display_progress import humanbytes
