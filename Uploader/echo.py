@@ -278,7 +278,9 @@ async def echo(bot, update):
                 "video", format_id, format_ext, randem)
             inline_keyboard.append([
                 InlineKeyboardButton(
-                    "🎬 sᴍᴇᴅɪᴀ",
+                    "Video [" +
+                    "] ( " +
+                    humanbytes(size) + " )",
                     callback_data=(cb_string_video).encode("UTF-8")
                 )
             ])
@@ -288,7 +290,9 @@ async def echo(bot, update):
                 "video", format_id, format_ext)
             inline_keyboard.append([
                 InlineKeyboardButton(
-                    "🎥 ᴠɪᴅᴇᴏ",
+                    "Video [" +
+                    "] ( " +
+                    humanbytes(size) + " )",
                     callback_data=(cb_string_video).encode("UTF-8")
                 )
             ])
