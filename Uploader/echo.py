@@ -194,6 +194,7 @@ async def echo(bot, update):
                 if format_string is None:
                     format_string = formats.get("format")
                 format_ext = formats.get("ext")
+
                 if formats.get('filesize'):
                     size = formats['filesize']
                 elif formats.get('filesize_approx'):
