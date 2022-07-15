@@ -65,4 +65,4 @@ class Config(object):
     PRO_USERS.append(OWNER_ID)
     BROADCAST_AS_COPY = bool(os.environ.get("BROADCAST_AS_COPY", "False"))
     BYPASS = os.environ.get("BYPASS", "")
-
+    ADL_BOT_RQ = {}
