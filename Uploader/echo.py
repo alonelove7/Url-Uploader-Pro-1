@@ -131,8 +131,7 @@ async def echo(bot, update):
         command_to_exec = [
             "yt-dlp",
             "--no-warnings",
-       
-            "--skip-unavailable-fragments",
+            "--youtube-skip-dash-manifest",
             "-j",
             url
         ]        
@@ -162,7 +161,7 @@ async def echo(bot, update):
     t_response = stdout.decode().strip()
     # logger.info(t_response)
 
-    if e_response and "nonnumeric port" not in e_response:
+    if (e_response and "nonnumeric port" not in e_response) and "/sonyliv/" not in url:
         # logger.warn("Status : FAIL", exc.returncode, exc.output)
         error_message = e_response.replace("please report this issue on https://yt-dl.org/bug . Make sure you are using the latest version; see  https://yt-dl.org/update  on how to update. Be sure to call youtube-dl with the --verbose flag and include its complete output.", "")
         if "This video is only available for registered users." in error_message:
