@@ -1,6 +1,6 @@
 import time
 from Uploader.config import Config
-from .progress_bar import TimeFormatter
+from Uploader.functions.display_progress import TimeFormatter
 
 async def timegap_check(m):
     """Checking the time gap is completed or not 
