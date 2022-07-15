@@ -62,12 +62,7 @@ async def echo(bot, update):
         return
 
 
-    if Config.TIME_GAP:
-        time_gap = await timegap_check(update)
-        if time_gap:
-            return
-        Config.TIME_GAP_STORE[update.from_user.id] = time.time()
-        asyncio.get_event_loop().create_task(notify(update, Config.TIME_GAP))
+
 
     logger.info(update.from_user)
     url = update.text
