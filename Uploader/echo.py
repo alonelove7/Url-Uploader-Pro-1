@@ -132,7 +132,8 @@ async def echo(bot, update):
         command_to_exec = [
             "yt-dlp",
             "--no-warnings",
-            #"skip"
+            "--youtube-skip-dash-manifest",
+            "--youtube-skip-hls-manifest",
             "--allow-dynamic-mpd",
             "-j",
             url
