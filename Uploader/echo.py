@@ -17,7 +17,6 @@ from pyrogram import filters
 import os
 import time
 import random
-import asyncio
 from pyrogram import Client, enums
 from Uploader.functions.forcesub import handle_force_subscribe
 from Uploader.functions.display_progress import humanbytes
@@ -30,7 +29,7 @@ from pyrogram.errors import UserNotParticipant
 from Uploader.functions.ran_text import random_char
 from Uploader.database.database import db
 from Uploader.database.add import AddUser
-from Uploader.time_gap import *
+
 from pyrogram.types import Thumbnail
 
 f = filters.private & filters.regex(pattern=".*http.*")
