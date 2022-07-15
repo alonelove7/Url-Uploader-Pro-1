@@ -124,6 +124,7 @@ async def youtube_dl_call_back(bot, update):
         command_to_exec = [
             "yt-dlp",
             "-c",
+            "--merge-output-format",
             "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
             "--embed-subs",
             "-f", youtube_dl_format,
@@ -137,6 +138,7 @@ async def youtube_dl_call_back(bot, update):
         command_to_exec = [
             "yt-dlp",
             "-c",
+            "--merge-output-format",
             "--max-filesize", str(Config.TG_MAX_FILE_SIZE),
             "--embed-subs",
             
