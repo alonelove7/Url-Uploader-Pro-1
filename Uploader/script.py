@@ -121,7 +121,7 @@ sʜᴏᴡ ᴛʜᴜᴍʙɴᴀɪʟ
     IFLONG_FILE_NAME = " Only 64 characters can be named . "
     RENAME_403_ERR = "Sorry. You are not permitted to rename this file."
     ABS_TEXT = " Please don't be selfish."
-    PLANS = "🔰 My Plans 🔰
+    PLANS = """🔰 My Plans 🔰
 
 🛡️PLANS 1(PER 50 LINKS)🛡️
 
@@ -145,7 +145,8 @@ sʜᴏᴡ ᴛʜᴜᴍʙɴᴀɪʟ
 
 🌸 1Day      - ₹100
 🌺 1Week   - ₹150
-🌷 1Month - ₹300 "
+🌷 1Month - ₹300
+"""
 
     FORMAT_SELECTION = "Nᴏᴡ Sᴇʟᴇᴄᴛ Tʜᴇ Dᴇsɪʀᴇᴅ Fᴏʀᴍᴀᴛ ᴏʀ Fɪʟᴇ 🗄️ Sɪᴢᴇ ᴛᴏ Uᴘʟᴏᴀᴅ\n\n🌸 {} 🌸"
     SET_CUSTOM_USERNAME_PASSWORD = """"""
