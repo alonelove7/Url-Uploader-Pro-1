@@ -145,7 +145,7 @@ sʜᴏᴡ ᴛʜᴜᴍʙɴᴀɪʟ
 
 🌸 1Day      - ₹100
 🌺 1Week   - ₹150
-🌷 1Month - ₹300"
+🌷 1Month - ₹300 "
 
     FORMAT_SELECTION = "Nᴏᴡ Sᴇʟᴇᴄᴛ Tʜᴇ Dᴇsɪʀᴇᴅ Fᴏʀᴍᴀᴛ ᴏʀ Fɪʟᴇ 🗄️ Sɪᴢᴇ ᴛᴏ Uᴘʟᴏᴀᴅ\n\n🌸 {} 🌸"
     SET_CUSTOM_USERNAME_PASSWORD = """"""
