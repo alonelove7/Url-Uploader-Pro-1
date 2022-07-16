@@ -123,7 +123,6 @@ async def info_handler(bot, update):
 )
 async def help_bot(_, m: Message):
     await AddUser(_, m)
-
     return await m.reply_text(
         Translation.HELP_TEXT,
         reply_markup=Translation.HELP_BUTTONS,
