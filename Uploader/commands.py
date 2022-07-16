@@ -30,7 +30,7 @@ async def start_bot(_, m: Message):
         Translation.START_TEXT.format(m.from_user.first_name),
         reply_markup=Translation.START_BUTTONS,
         disable_web_page_preview=True,
-        quote=True,
+        quote=True
     )
 
 
@@ -44,7 +44,7 @@ async def help_bot(_, m: Message):
     return await m.reply_text(
         Translation.PLANS,
         reply_markup=Translation.BUTTONS,
-        disable_web_page_preview=True,
+        disable_web_page_preview=True
     )
 
 @Client.on_message(
@@ -56,7 +56,7 @@ async def aboutme(_, m: Message):
     return await m.reply_text(
         Translation.ABOUT_TEXT,
         reply_markup=Translation.ABOUT_BUTTONS,
-        disable_web_page_preview=True,
+        disable_web_page_preview=True
     )
 
 @Client.on_message(
