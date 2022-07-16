@@ -256,6 +256,10 @@ async def echo(bot, update):
                     InlineKeyboardButton(
                         "🎼 MP3 " + "(" + "320 kbps" + ")", callback_data=cb_string.encode("UTF-8"))
                 ])
+                inline_keyboard.append([                 
+                    InlineKeyboardButton(
+                        "⛔ ᴄʟᴏsᴇ", callback_data='close')               
+                ])
         else:
             format_id = response_json["format_id"]
             format_ext = response_json["ext"]
