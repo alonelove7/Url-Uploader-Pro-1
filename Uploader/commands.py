@@ -84,7 +84,6 @@ async def edit_caption(bot, update):
 @Client.on_message(
     filters.private & filters.command(["caption"])
 )
-
 async def add_caption_help(bot, update):
     await AddUser(bot, update)
     await bot.send_message(
@@ -99,8 +98,6 @@ async def add_caption_help(bot, update):
     filters.private & filters.command("me")
 )
 async def info_handler(bot, update):
-
-
     if update.from_user.last_name:
         last_name = update.from_user.last_name
     else:
