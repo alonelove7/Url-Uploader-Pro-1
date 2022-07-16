@@ -236,7 +236,7 @@ async def echo(bot, update):
                     ikeyboard = [
                         InlineKeyboardButton(
                             "🎬 [" +
-                            "] ( " +
+                            "] ( " + " " + format_ext.upper() + " " +
                             humanbytes(size) + " )",
                             callback_data=(cb_string_video).encode("UTF-8")
                         )
