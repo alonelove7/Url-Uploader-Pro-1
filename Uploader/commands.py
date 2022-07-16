@@ -35,16 +35,7 @@ async def start_bot(_, m: Message):
 
 
 
-@Client.on_message(
-    filters.command("plans") & filters.private,
-)
-async def help_bot(_, m: Message):
-    await AddUser(_, m)
-    return await m.reply_text(
-        Translation.PLANS,
-        reply_markup=Translation.BUTTONS,
-        disable_web_page_preview=True
-    )
+
 
 @Client.on_message(
     filters.command("about") & filters.private,
@@ -117,5 +108,21 @@ async def help_bot(_, m: Message):
     return await m.reply_text(
         Translation.HELP_TEXT,
         reply_markup=Translation.HELP_BUTTONS,
+        disable_web_page_preview=True
+    )
+
+
+
+
+
+
+@Client.on_message(
+    filters.command("plans") & filters.private,
+)
+async def plans(_, m: Message):
+    await AddUser(_, m)
+    return await m.reply_text(
+        Translation.PLANS,
+        reply_markup=Translation.BUTTONS,
         disable_web_page_preview=True
     )
