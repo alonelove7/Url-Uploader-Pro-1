@@ -227,48 +227,34 @@ async def echo(bot, update):
                 if format_string is not None and not "audio only" in format_string:
                     ikeyboard = [
                         InlineKeyboardButton(
-                            "🎬 " + format_string + " " + format_ext.upper() + " " + humanbytes(size) + " ",
+                            "S " + format_string + " video " + approx_file_size + " ",
                             callback_data=(cb_string_video).encode("UTF-8")
                         )
                     ]
-                    """if duration is not None:
-                        cb_string_video_message = "{}|{}|{}|{}|{}".format(
-                            "vm", format_id, format_ext, ran, randem)
-                        ikeyboard.append(
-                            InlineKeyboardButton(
-                                "VM",
-                                callback_data=(
-                                    cb_string_video_message).encode("UTF-8")
-                            )
-                        )"""
+
                 else:
-                    # special weird case :\
                     ikeyboard = [
                         InlineKeyboardButton(
-                            "🎬 [" +
+                            "SVideo [" +
                             "] ( " +
-                            humanbytes(size) + " )",
+                            approx_file_size + " )",
                             callback_data=(cb_string_video).encode("UTF-8")
                         )
                     ]
                 inline_keyboard.append(ikeyboard)
             if duration is not None:
                 cb_string_64 = "{}|{}|{}|{}".format("audio", "64k", "mp3", randem)
-                cb_string_128 = "{}|{}|{}|{}".format("audio", "128k", "mp3", randem)
+                cb_string_128 = "{}|{}|{}|{}".format("audio", "128k", "mp3", randem )
                 cb_string = "{}|{}|{}|{}".format("audio", "320k", "mp3", randem)
                 inline_keyboard.append([
                     InlineKeyboardButton(
-                        "🎵 ᴍᴘ𝟹 " + "(" + "64 ᴋʙᴘs" + ")", callback_data=cb_string_64.encode("UTF-8")),
+                        "🎶MP3🎶" + "(" + "64 kbps" + ")", callback_data=cb_string_64.encode("UTF-8")),
                     InlineKeyboardButton(
-                        "🎵 ᴍᴘ𝟹 " + "(" + "128 ᴋʙᴘs" + ")", callback_data=cb_string_128.encode("UTF-8"))
+                        "🎶MP3🎶 " + "(" + "128 kbps" + ")", callback_data=cb_string_128.encode("UTF-8"))
                 ])
                 inline_keyboard.append([
                     InlineKeyboardButton(
-                        "🎵 ᴍᴘ𝟹 " + "(" + "320 ᴋʙᴘs" + ")", callback_data=cb_string.encode("UTF-8"))
-                ])
-                inline_keyboard.append([                 
-                    InlineKeyboardButton(
-                        "✔️ ᴄʟᴏsᴇ", callback_data='close')               
+                        "🎶MP3🎶 " + "(" + "320 kbps" + ")", callback_data=cb_string.encode("UTF-8"))
                 ])
         else:
             format_id = response_json["format_id"]
@@ -279,9 +265,7 @@ async def echo(bot, update):
                 "video", format_id, format_ext, randem)
             inline_keyboard.append([
                 InlineKeyboardButton(
-                    "Video [" +
-                    "] ( " +
-                    humanbytes(size) + " )",
+                    "Video",
                     callback_data=(cb_string_video).encode("UTF-8")
                 )
             ])
@@ -291,42 +275,9 @@ async def echo(bot, update):
                 "video", format_id, format_ext)
             inline_keyboard.append([
                 InlineKeyboardButton(
-                    "Video [" +
-                    "] ( " +
-                    humanbytes(size) + " )",
+                    "video",
                     callback_data=(cb_string_video).encode("UTF-8")
                 )
             ])
         reply_markup = InlineKeyboardMarkup(inline_keyboard)
-        await chk.delete()
-        await bot.send_message(
-            chat_id=update.chat.id,
-            text=Translation.FORMAT_SELECTION.format(Thumbnail) + "\n" + Translation.SET_CUSTOM_USERNAME_PASSWORD,
-            reply_markup=reply_markup,
-            #parse_mode=enums.ParseMode.HTML,
-            reply_to_message_id=update.id
-        )
-    else:
-        # fallback for nonnumeric port a.k.a seedbox.io
-        inline_keyboard = []
-        cb_string_file = "{}={}={}".format(
-            "file", "LFO", "NONE")
-        cb_string_video = "{}={}={}".format(
-            "video", "OFL", "ENON")
-        inline_keyboard.append([
-            InlineKeyboardButton(
-                "🎬 ᴍᴇᴅɪᴀ",
-                callback_data=(cb_string_video).encode("UTF-8")
-            )
-        ])
-        reply_markup = InlineKeyboardMarkup(inline_keyboard)
-        await chk.delete(True)
-        await bot.send_message(
-            chat_id=update.chat.id,
-            text=Translation.FORMAT_SELECTION,
-            reply_markup=reply_markup,
-            #parse_mode=enums.ParseMode.HTML,
-            reply_to_message_id=update.id
-        )
-
 
