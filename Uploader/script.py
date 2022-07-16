@@ -121,7 +121,32 @@ sʜᴏᴡ ᴛʜᴜᴍʙɴᴀɪʟ
     IFLONG_FILE_NAME = " Only 64 characters can be named . "
     RENAME_403_ERR = "Sorry. You are not permitted to rename this file."
     ABS_TEXT = " Please don't be selfish."
-    UPGRADE_TEXT = "<b>No preminum plans available in this bot </b>  /help for Details"
+    PLANS = "🔰 My Plans 🔰
+
+🛡️PLANS 1(PER 50 LINKS)🛡️
+
+🌸 1 Day      - ₹10
+🌺 1 Week   - ₹30
+🌷 1 Month - ₹50
+
+🛡️ PLANS 2(PER 100 LINKS)🛡️
+
+🌸 1 Day      - ₹20
+🌺 1 Week   - ₹50
+🌷 1 Month - ₹100
+
+🛡️ PLANS 3(PER 200 LINKS)🛡️
+
+🌸 1Day      - ₹30
+🌺 1Week   - ₹80
+🌷 1Month - ₹150
+
+🛡️ PLANS 4(UNLIMITED LINKS)🛡️
+
+🌸 1Day      - ₹100
+🌺 1Week   - ₹150
+🌷 1Month - ₹300"
+
     FORMAT_SELECTION = "Nᴏᴡ Sᴇʟᴇᴄᴛ Tʜᴇ Dᴇsɪʀᴇᴅ Fᴏʀᴍᴀᴛ ᴏʀ Fɪʟᴇ 🗄️ Sɪᴢᴇ ᴛᴏ Uᴘʟᴏᴀᴅ"
     SET_CUSTOM_USERNAME_PASSWORD = """"""
     NOYES_URL = "@robot URL detected. Please use https://shrtz.me/PtsVnf6 and get me a fast URL so that I can upload to Telegram, without me slowing down for other users."
