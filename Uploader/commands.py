@@ -126,5 +126,5 @@ async def help_bot(_, m: Message):
     return await m.reply_text(
         Translation.HELP_TEXT,
         reply_markup=Translation.HELP_BUTTONS,
-        disable_web_page_preview=True,
+        disable_web_page_preview=True
     )
