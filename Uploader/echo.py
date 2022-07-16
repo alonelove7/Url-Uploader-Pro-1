@@ -180,7 +180,7 @@ async def echo(bot, update):
             chat_id=update.chat.id,
             text=Translation.NO_VOID_FORMAT_FOUND.format(str(error_message)),
             reply_to_message_id=update.id,
-            parse_mode=enums.ParseMode.HTML,
+           # parse_mode=enums.ParseMode.HTML,
             disable_web_page_preview=True
         )
         return False
@@ -206,8 +206,7 @@ async def echo(bot, update):
             for formats in response_json["formats"]:
                 format_id = formats.get("format_id")
                 format_string = formats.get("format_note")
-                if format_string is None:
-                    format_string = formats.get("format")
+                format_string = formats.get("format")
                 if "DASH" in format_string.upper():
                     continue
                 
