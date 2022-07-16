@@ -40,7 +40,6 @@ async def start_bot(_, m: Message):
 )
 async def help_bot(_, m: Message):
     await AddUser(_, m)
-
     return await m.reply_text(
         Translation.PLANS,
         reply_markup=Translation.BUTTONS,
@@ -52,7 +51,6 @@ async def help_bot(_, m: Message):
 )
 async def aboutme(_, m: Message):
     await AddUser(_, m)
-
     return await m.reply_text(
         Translation.ABOUT_TEXT,
         reply_markup=Translation.ABOUT_BUTTONS,
@@ -64,7 +62,6 @@ async def aboutme(_, m: Message):
 )
 async def edit_caption(bot, update):
     await AddUser(bot, update)
-
     try:
         await bot.send_cached_media(
             chat_id=update.chat.id,
@@ -90,7 +87,6 @@ async def edit_caption(bot, update):
 
 async def add_caption_help(bot, update):
     await AddUser(bot, update)
-
     await bot.send_message(
         chat_id=update.chat.id,
         text=Translation.ADD_CAPTION_HELP,
