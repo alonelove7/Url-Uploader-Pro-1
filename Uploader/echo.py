@@ -280,4 +280,33 @@ async def echo(bot, update):
                 )
             ])
         reply_markup = InlineKeyboardMarkup(inline_keyboard)
-
+        await chk.delete()
+        await bot.send_message(
+            chat_id=update.chat.id,
+            text=Translation.FORMAT_SELECTION.format(Thumbnail) + "\n\n" + Translation.SET_CUSTOM_USERNAME_PASSWORD,
+            reply_markup=reply_markup,
+            #parse_mode="html",
+            reply_to_message_id=update.id
+        )
+    else:
+        inline_keyboard = []
+        cb_string_file = "{}={}={}".format(
+            "file", "LFO", "NONE")
+        cb_string_video = "{}={}={}".format(
+            "video", "OFL", "ENON")
+        inline_keyboard.append([
+            InlineKeyboardButton(
+                "🎬",
+                callback_data=(cb_string_video).encode("UTF-8")
+            )
+        ])
+        reply_markup = InlineKeyboardMarkup(inline_keyboard)
+        await chk.delete()
+        
+        await bot.send_message(
+            chat_id=update.chat.id,
+            text=Translation.FORMAT_SELECTION.format(""),
+            reply_markup=reply_markup,
+            #parse_mode="html",
+            reply_to_message_id=update.id
+        )
