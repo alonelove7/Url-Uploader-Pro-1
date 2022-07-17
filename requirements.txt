@@ -6,7 +6,7 @@ Pillow
 pyrogram
 requests
 tgcrypto
-
+pytz
 olefile
 motor
 pymongo
