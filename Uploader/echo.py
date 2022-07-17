@@ -215,8 +215,10 @@ async def echo(bot, update):
                     "video", format_id, format_ext, randem)
                 cb_string_file = "{}|{}|{}|{}".format(
                     "file", format_id, format_ext, randem)
-                if format_string is not None and not "audio only" in format_string:
-                    ikeyboard = [
+                
+                    
+
+                ikeyboard = [
                         InlineKeyboardButton(
                             "🎬 " + format_string + " " + format_ext.upper() + " " + humanbytes(size) + " ",
                             callback_data=(cb_string_video).encode("UTF-8")
