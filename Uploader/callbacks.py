@@ -61,10 +61,6 @@ async def close_cb(c, m):
 async def back_cb(c, m):
     await m.answer()
     await start(c, m, True)
-    if "|" in cb_data:
-        await youtube_dl_call_back(c, m)
-    elif "=" in cb_data:
-        await ddl_call_back(c, m)
 
 @Client.on_callback_query(filters.regex('^about$'))
 async def about_cb(c, m):
