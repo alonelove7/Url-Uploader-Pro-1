@@ -214,3 +214,10 @@ Please Check /plans and upgrade your subscription """
     ADD_CAPTION_HELP = """Select an Uploaded file/video or forward me <b>Any Telegram File</b> and just write the text you want to be on the file <b>as a reply to the file</b> and the text you wrote will be attached as the caption! 🤩
     
 Ex: <a href='https://telegra.ph//file/eebf40fe18abdd284d5b4.jpg'>See This!</a> 👇"""
+
+class TEXT:
+    SAVED_CUSTOM_THUMBNAIL = "__Your Thumbnail Saved Permanently 🖼__"
+    DELETED_CUSTOM_THUMBNAIL = "__Your Thumbnail Deleted Successfully 🗑__"
+    NO_CUSTOM_THUMB_NAIL_FOUND = "No Thumbnail Found 😅"
+    THUMBNAIL_CAPTION = "__**👆 This is your permanent thumbnail**__"
+
