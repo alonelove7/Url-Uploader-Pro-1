@@ -207,10 +207,11 @@ async def youtube_dl_call_back(bot, update):
             #start_time = time.time()
        
             start_time = time.time()
-
+            settings = await c.db.get_all_settings(m.from_user.id)
+            as_file = settings['upload_as_file']
             # try to upload file
 
-            if (await db.get_upload_as_doc(update.from_user.id)) is False:
+            if tg_send_type == "upload_as_file"
                 thumbnail = await Gthumb01(bot, update)
                 await bot.send_document(
                     chat_id=update.message.chat.id,
