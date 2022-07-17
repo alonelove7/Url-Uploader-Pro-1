@@ -207,7 +207,7 @@ async def youtube_dl_call_back(bot, update):
             #start_time = time.time()
        
             start_time = time.time()
-            settings = await c.db.get_all_settings(m.from_user.id)
+            settings = await bot.db.get_all_settings(update.from_user.id)
             as_file = settings['upload_as_file']
             # try to upload file
 
@@ -301,7 +301,7 @@ async def youtube_dl_call_back(bot, update):
     # if screenshots
             if screen_shots != 0:
                 try:
-                    send_text = await m.reply_text(text="**Generating Screenshots...😎**")
+                    send_text = await update.reply_text(text="**Generating Screenshots...😎**")
 
                     if duration > 0:
                         images = []
