@@ -129,7 +129,7 @@ async def ddl_call_back(bot, update):
 
     
 
-            settings = await c.db.get_all_settings(m.from_user.id)
+            settings = await bot.db.get_all_settings(update.from_user.id)
             as_file = settings['upload_as_file']
             # try to upload file
 
