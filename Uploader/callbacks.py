@@ -68,14 +68,14 @@ async def about_cb(c, m):
     await m.answer()
     await about(c, m, True)
 
-@Client.on_callback_query(filters.regex('^|'))
+@Client.on_callback_query(filters.regex('^|$'))
 async def about_cb(c, m):
     await m.answer()               
     await youtube_dl_call_back(c, m)
 
 
 
-@Client.on_callback_query(filters.regex('^='))
+@Client.on_callback_query(filters.regex('^=$'))
 async def about_cb(c, m):
     await m.answer()               
     await ddl_call_back(c, m)
