@@ -22,7 +22,10 @@ from Uploader.thumbnail import delete_thumbnail
 
 
 
-
+@Client.on_callback_query(filters.regex('^|$'))
+async def button(c, m):
+    await m.answer()
+    await help(c, m, True)
 
 
 @Client.on_callback_query(filters.regex('^help$'))
