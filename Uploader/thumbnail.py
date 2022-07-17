@@ -14,7 +14,7 @@ import time
 # the Strings used for this "thing"
 from Uploader.script import Translation
 from pyrogram import Client
-from Uploader.database.add import AddUser
+
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
