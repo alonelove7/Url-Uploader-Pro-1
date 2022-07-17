@@ -15,14 +15,14 @@ import os
 import shutil
 import time
 from datetime import datetime
-from pyrogram import enums 
+#from pyrogram import enums 
 from Uploader.config import Config
 from Uploader.script import Translation
 from Uploader.thumbnail import *
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 from pyrogram.types import *
 from Uploader.functions.display_progress import progress_for_pyrogram, humanbytes
-from Uploader.database.database import db
+
 from PIL import Image
 from Uploader.functions.ran_text import random_char
 
