@@ -32,6 +32,7 @@ from Uploader.database.database import db
 from Uploader.config import Config
 from Uploader.database.database import db
 from Uploader.settings.settings import *
+from Uploader.script import TEXT
 
 f = filters.command(["delthumb"])
 s = filters.command("showthumb")
@@ -60,8 +61,8 @@ async def save_photo(c, m):
     )
 
     await send_message.edit(
-        text=TEXT.SAVED_CUSTOM_THUMBNAIL,
-        parse_mode="markdown"
+        text=TEXT.SAVED_CUSTOM_THUMBNAIL
+       # parse_mode="markdown"
     )
 
 
@@ -72,7 +73,7 @@ async def delete_thumbnail(c, m):
 
     send_message = await m.reply_text(
         "**Processing.....⏳**",
-        parse_mode="markdown",
+        #parse_mode="markdown",
         quote=True
     )
 
