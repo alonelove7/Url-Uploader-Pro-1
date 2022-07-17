@@ -194,13 +194,11 @@ async def echo(bot, update):
             for formats in response_json["formats"]:
                 format_id = formats.get("format_id")
                 format_string = formats.get("format_note")
-               
-                format_string = formats.get("format")
+
+
+                if format_string is None:
+                    format_string = formats.get("format")
                 format_ext = formats.get("ext")
-
-
-
-
 
 
                 if formats.get('filesize'):
