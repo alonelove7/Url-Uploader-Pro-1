@@ -36,76 +36,121 @@ from Uploader.settings.settings import *
 f = filters.command(["delthumb"])
 s = filters.command("showthumb")
 
-@Client.on_message(filters.photo)
-async def save_photo(bot, update):
-    await AddUser(bot, update)
-    if Config.UPDATES_CHANNEL:
-      fsub = await handle_force_subscribe(bot, update)
-      if fsub == 400:
-        return
-    # received single photo
-    download_location = os.path.join(
-        Config.DOWNLOAD_LOCATION,
-        str(update.from_user.id) + ".jpg"
+
+################## Saving thumbnail 🖼 ##################
+
+@Client.on_message(filters.photo & filters.incoming & filters.private)
+async def save_photo(c, m):
+
+    send_message = await m.reply_text(
+        "**Processing.....⏳**",
+       # parse_mode="markdown",
+        quote=True
     )
-    await bot.download_media(
-        message=update,
-        file_name=download_location
+
+    is_user_exist = await c.db.is_user_exist(m.from_user.id)
+    if not is_user_exist:
+        await c.db.add_user(m.from_user.id)
+
+    download_location = f"{Config.DOWNLOAD_LOCATION}/{m.from_user.id}.jpg"
+    await c.db.update_settings_status(m.from_user.id, 'permanent_thumb', m.id)
+    await m.download(
+        file_name=download_location,
+        block=False
     )
-    await bot.send_message(
-        chat_id=update.chat.id,
-        text=Translation.SAVED_CUSTOM_THUMB_NAIL,
-        reply_to_message_id=update.id
+
+    await send_message.edit(
+        text=TEXT.SAVED_CUSTOM_THUMBNAIL,
+        parse_mode="markdown"
     )
-    await db.set_thumbnail(update.from_user.id, thumbnail=update.photo.file_id)
 
 
-@Client.on_message(f)
-async def delete_thumbnail(bot, update):
+################## Deleting permanent thumbnail 🗑 ##################
 
-    await AddUser(bot, update)
-    if Config.UPDATES_CHANNEL:
-      fsub = await handle_force_subscribe(bot, update)
-      if fsub == 400:
-        return
+@Client.on_message(filters.command("deletethumbnail") & filters.incoming & filters.private)
+async def delete_thumbnail(c, m):
 
-    download_location = os.path.join(
-        Config.DOWNLOAD_LOCATION,
-        str(update.from_user.id)
+    send_message = await m.reply_text(
+        "**Processing.....⏳**",
+        parse_mode="markdown",
+        quote=True
     )
+
+    is_user_exist = await c.db.is_user_exist(m.from_user.id)
+    if not is_user_exist:
+        await c.db.add_user(m.from_user.id)
+
+    download_location = f"{Config.DOWNLOAD_LOCATION}/{m.from_user.id}.jpg"
+    thumbnail = await c.db.get_settings_status(m.from_user.id, 'permanent_thumb')
+
+    if not thumbnail:
+        text = TEXT.NO_CUSTOM_THUMB_NAIL_FOUND
+
+    if thumbnail:
+        try:
+            await c.db.update_settings_status(m.from_user.id, 'permanent_thumb', '')
+        except:
+            pass
+        text = TEXT.DELETED_CUSTOM_THUMBNAIL
+
     try:
-        os.remove(download_location + ".jpg")
-        # os.remove(download_location + ".json")
+        os.remove(download_location)
     except:
         pass
-    await bot.send_message(
-        chat_id=update.chat.id,
-        text=Translation.DEL_ETED_CUSTOM_THUMB_NAIL,
-        reply_to_message_id=update.id
+
+    await send_message.edit(
+        text=text
+        #parse_mode="markdown"
     )
-    await db.set_thumbnail(update.from_user.id, thumbnail=None)
 
-@Client.on_message(s)
-async def viewthumbnail(bot, update):
 
-    await AddUser(bot, update)
+################## Sending permanent thumbnail 🕶 ##################
 
-    if Config.UPDATES_CHANNEL:
-      fsub = await handle_force_subscribe(bot, update)
-      if fsub == 400:
-        return   
-    thumbnail = await db.get_thumbnail(update.from_user.id)
-    if thumbnail is not None:
-        await bot.send_photo(
-        chat_id=update.chat.id,
-        photo=thumbnail,
-        caption=f"ʏᴏᴜʀ ᴄᴜʀʀᴇɴᴛ sᴀᴠᴇᴅ ᴛʜᴜᴍʙɴᴀɪʟ 🦠",
-        reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton("🗑️ ᴅᴇʟᴇᴛᴇ ᴛʜᴜᴍʙɴᴀɪʟ", callback_data="deleteThumbnail")]]
-                ),
-        reply_to_message_id=update.id)
-    else:
-        await update.reply_text(text=f"ɴᴏ ᴛʜᴜᴍʙɴᴀɪʟ ғᴏᴜɴᴅ 🤒")
+@Client.on_message(filters.command("showthumbnail") & filters.incoming & filters.private)
+async def show_thumbnail(c, m):
+
+    send_message = await m.reply_text(
+        "**Processing.....⏳**",
+       # parse_mode="markdown",
+        quote=True
+    )
+
+    is_user_exist = await c.db.is_user_exist(m.from_user.id)
+    if not is_user_exist:
+        await c.db.add_user(m.from_user.id)
+
+    thumbnail = await c.db.get_settings_status(m.from_user.id, 'permanent_thumb')
+    if not thumbnail:
+         await send_message.edit(
+             text=TEXT.NO_CUSTOM_THUMB_NAIL_FOUND
+         )
+    if thumbnail:
+         download_location = f"{Config.DOWNLOAD_LOCATION}/{m.from_user.id}.jpg"
+
+         if not os.path.exists(download_location):
+             thumb_nail = await c.get_messages(m.chat.id, thumbnail)
+             try:
+                 photo_location = await thumb_nail.download(file_name=download_location)
+             except:
+                 await c.db.update_settings_status(m.from_user.id, 'permanent_thumb', '')
+                 return await send_message.edit(text=TEXT.NO_CUSTOM_THUMB_NAIL_FOUND)
+         else:
+             photo_location = download_location
+
+         await send_message.delete()
+         await m.reply_photo(
+             photo=photo_location,
+             caption=TEXT.THUMBNAIL_CAPTION,
+             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("𝐃𝐞𝐥𝐞𝐭𝐞 𝐓𝐡𝐮𝐦𝐛𝐧𝐚𝐢𝐥 🗑️", callback_data="del")]]),
+             #parse_mode="markdown",
+             quote=True
+         )
+
+
+################## THE END 🛑 ##################
+
+@Client.on_message(filters.photo)
+asy
 
 
 async def Gthumb01(bot, update):
