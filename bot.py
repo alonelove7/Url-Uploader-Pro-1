@@ -1,19 +1,38 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# (c) Shrimadhav U K | Modifieded By : @DC4_WARRIOR
+
+import logging
+import logging.config
+
+# Get logging configurations
+logging.getLogger().setLevel(logging.ERROR)
+logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 import os
-from Uploader.config import Config
-from pyrogram import Client as Clinton
+import pytz
+import datetime
+from .config import Config
+from pyrogram import Client
+from .database.database import Database
 
-if __name__ == "__main__" :
-    # create download directory, if not exist
+
+def main():
+
+    Renamer = Client("DKBOTZ",
+                 bot_token=Config.BOT_TOKEN,
+                 api_id=Config.API_ID,
+                 api_hash=Config.API_HASH,
+                 plugins=dict(root="Uploader/plugins"),
+                 workers=16)
+
     if not os.path.isdir(Config.DOWNLOAD_LOCATION):
         os.makedirs(Config.DOWNLOAD_LOCATION)
-    plugins = dict(root="Uploader")
-    Warrior = Clinton("@UPLOADER_X_BOT",
-    bot_token=Config.BOT_TOKEN,
-    api_id=Config.API_ID,
-    api_hash=Config.API_HASH,
-    plugins=plugins)
-    Warrior.run()
+
+    time = datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
+    Config.RESTART_TIME.append(time)
+
+    Renamer.db = Database(Config.DATABASE_URL, Config.BOT_USERNAME)
+    Renamer.broadcast_ids = {}
+    Renamer.run()
+
+
+if __name__ == "__main__":
+    main()
