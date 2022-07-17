@@ -308,7 +308,7 @@ async def youtube_dl_call_back(bot, update):
                         random_start = random.randint(0, duration - (screen_shots * ttl_step))
                         current_ttl = random_start
                         for looper in range(0, screen_shots):
-                            ss_img = await take_screen_shot(new_file_name, tmp_directory_for_each_user, current_ttl)
+                            ss_img = await take_screen_shot(description, tmp_directory_for_each_user, current_ttl)
                             current_ttl = current_ttl + ttl_step
                             images.append(ss_img)
         
@@ -350,14 +350,14 @@ async def youtube_dl_call_back(bot, update):
 
     # if sample video is needed
             if sample_video != 0:
-                await generate_sample(new_file_name, c, m)
+                await generate_sample(description, bot, update)
 
             try:
-                os.remove(new_file_name)
+                os.remove(description)
                 shutil.rmtree(tmp_directory_for_each_user)
             except Exception as e:
                 print(e)
-            await complete_process(c, m)
+            await complete_process(bot, update)
             try:
                 os.remove(download_directory)
                 os.remove(thumb_image_path)
