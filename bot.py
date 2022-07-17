@@ -9,9 +9,9 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 import os
 import pytz
 import datetime
-from .config import Config
+from Uploader.config import Config
 from pyrogram import Client
-from .database.database import Database
+from Uploader.database.database import Database
 
 
 def main():
