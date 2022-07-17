@@ -291,7 +291,73 @@ async def youtube_dl_call_back(bot, update):
      
             else:
                 logger.info("✅ " + custom_file_name)
+
             end_two = datetime.now()
+            settings = await c.db.get_all_settings(m.from_user.id)
+            screen_shots = settings['screen_shot']
+            sample_video = settings['sample_video']
+
+    # if screenshots
+            if screen_shots != 0:
+                try:
+                    send_text = await m.reply_text(text="**Generating Screenshots...😎**")
+
+                    if duration > 0:
+                        images = []
+                        ttl_step = duration // screen_shots
+                        random_start = random.randint(0, duration - (screen_shots * ttl_step))
+                        current_ttl = random_start
+                        for looper in range(0, screen_shots):
+                            ss_img = await take_screen_shot(new_file_name, tmp_directory_for_each_user, current_ttl)
+                            current_ttl = current_ttl + ttl_step
+                            images.append(ss_img)
+        
+              
+                        media_album_p = []
+                        if images is not None:
+                            i = 0
+                            caption = "**© @DKBOTZ**"
+                            for image in images:
+                                if image != None:
+                                    if i == 0:
+                                        media_album_p.append(
+                                            InputMediaPhoto(
+                                                media=images[i],
+                                                caption=caption,
+                                        #parse_mode="markdown"
+                                            )
+                                        )
+                                    else:
+                                        media_album_p.append(
+                                            InputMediaPhoto(
+                                                media=image
+                                            )
+                                        )
+                                    i = i + 1
+                            await send_text.delete()
+                            await m.reply_chat_action("upload_photo")
+                            await m.reply_media_group(
+                                media=media_album_p,
+                                disable_notification=True,
+                                quote=True,
+                            )
+                    else:
+                        await send_text.edit("**😑 Failed To Generate Screenshots**")
+
+                except Exception as e:
+                    print(e)
+                    await send_text.edit("**Unable To Generate Screenshots 😔**\n\nError: {e}")
+
+    # if sample video is needed
+            if sample_video != 0:
+                await generate_sample(new_file_name, c, m)
+
+    try:
+        os.remove(new_file_name)
+        shutil.rmtree(tmp_directory_for_each_user)
+    except Exception as e:
+        print(e)
+    await complete_process(c, m)
             try:
                 os.remove(download_directory)
                 os.remove(thumb_image_path)
