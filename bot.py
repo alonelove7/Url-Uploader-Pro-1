@@ -10,13 +10,9 @@ import os
 import pytz
 import datetime
 from Uploader.config import Config
-from pyrogram import Client
+
 from Uploader.database.database import Database
 
-
-
-import os
-from config import Config
 from pyrogram import Client as Clinton
 
 if __name__ == "__main__" :
