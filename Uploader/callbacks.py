@@ -83,7 +83,7 @@ async def deletethumb_cb(c, m):
 async def button(bot, update):
 
 
-    elif "|" in update.data:
+    if "|" in update.data:
         await youtube_dl_call_back(bot, update)
     elif "=" in update.data:
         await ddl_call_back(bot, update)
