@@ -30,7 +30,7 @@ if __name__ == "__main__" :
     api_hash=Config.API_HASH,
 
     plugins=plugins)
-    Uploader.db = Database(Config.DATABASE_URL, Config.BOT_USERNAME)
-    Uploader.broadcast_ids = {}
+    Warrior.db = Database(Config.DATABASE_URL, Config.BOT_USERNAME)
+    Warrior.broadcast_ids = {}
     Warrior.run()
 
