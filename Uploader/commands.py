@@ -1,4 +1,4 @@
-
+#(C) Callback fix by CvaTricks
 
 
 import os
@@ -116,3 +116,5 @@ async def about(c, m, cb=False):
             quote=True
         )
 
+async def donate(bot, update):
+    await bot.send_message(update.chat.id, "Thanks for showing interest on Donation")
