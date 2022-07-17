@@ -68,17 +68,7 @@ async def about_cb(c, m):
     await m.answer()
     await about(c, m, True)
 
-@Client.on_callback_query(filters.regex('^|'))
-async def about_cb(c, m):
-    await m.answer()               
-    await youtube_dl_call_back(c, m)
 
-
-
-@Client.on_callback_query(filters.regex('^='))
-async def about_cb(c, m):
-    await m.answer()               
-    await ddl_call_back(c, m)
 
 
 
@@ -87,3 +77,16 @@ async def deletethumb_cb(c, m):
     await m.answer()
     await delete_thumbnail(c, m.message.reply_to_message)
     await m.message.delete
+
+
+@Client.on_callback_query()
+async def button(bot, update):
+
+
+    elif "|" in update.data:
+        await youtube_dl_call_back(bot, update)
+    elif "=" in update.data:
+        await ddl_call_back(bot, update)
+
+    else:
+        await update.message.delete()
