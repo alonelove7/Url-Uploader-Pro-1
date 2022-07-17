@@ -352,12 +352,12 @@ async def youtube_dl_call_back(bot, update):
             if sample_video != 0:
                 await generate_sample(new_file_name, c, m)
 
-    try:
-        os.remove(new_file_name)
-        shutil.rmtree(tmp_directory_for_each_user)
-    except Exception as e:
-        print(e)
-    await complete_process(c, m)
+            try:
+                os.remove(new_file_name)
+                shutil.rmtree(tmp_directory_for_each_user)
+            except Exception as e:
+                print(e)
+            await complete_process(c, m)
             try:
                 os.remove(download_directory)
                 os.remove(thumb_image_path)
