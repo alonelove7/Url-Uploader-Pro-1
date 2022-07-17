@@ -28,10 +28,9 @@ from asyncio import TimeoutError
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
 from Uploader.functions.forcesub import handle_force_subscribe
-from Uploader.database.database import db
+
 from Uploader.config import Config
-from Uploader.database.database import db
-from Uploader.settings.settings import *
+
 from Uploader.script import TEXT
 
 f = filters.command(["delthumb"])
@@ -155,7 +154,7 @@ async def show_thumbnail(c, m):
 
 async def Gthumb01(bot, update):
     thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
-    db_thumbnail = await db.get_thumbnail(update.from_user.id)
+    db_thumbnail = await db.get_settings_status(update.from_user.id, 'permanent_thumb')
     if db_thumbnail is not None:
         thumbnail = await bot.download_media(message=db_thumbnail, file_name=thumb_image_path)
         Image.open(thumbnail).convert("RGB").save(thumbnail)
@@ -169,7 +168,7 @@ async def Gthumb01(bot, update):
 
 async def Gthumb02(bot, update, duration, download_directory):
     thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
-    db_thumbnail = await db.get_thumbnail(update.from_user.id)
+    db_thumbnail = await db.get_settings_status(update.from_user.id, 'permanent_thumb')
     if db_thumbnail is not None:
         thumbnail = await bot.download_media(message=db_thumbnail, file_name=thumb_image_path)
     else:
