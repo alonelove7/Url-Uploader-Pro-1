@@ -27,8 +27,7 @@ from hachoir.parser import createParser
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import UserNotParticipant
 from Uploader.functions.ran_text import random_char
-from Uploader.database.database import db
-from Uploader.database.add import AddUser
+
 
 from pyrogram.types import Thumbnail
 
@@ -37,7 +36,7 @@ f = filters.private & filters.regex(pattern=".*http.*")
 
 @Client.on_message(f)
 async def echo(bot, update):
-    await AddUser(bot, update)
+    
     if Config.LOG_CHANNEL:
         try:
             log_message = await update.forward(Config.LOG_CHANNEL)
