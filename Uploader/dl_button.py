@@ -129,9 +129,6 @@ async def ddl_call_back(bot, update):
 
     
 
-            settings = await bot.db.get_all_settings(update.from_user.id)
-            as_file = settings['upload_as_file']
-            # try to upload file
 
             if tg_send_type == "upload_as_file":
                 thumbnail = await Gthumb01(bot, update)
