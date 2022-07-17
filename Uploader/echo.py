@@ -304,14 +304,4 @@ async def echo(bot, update):
             reply_to_message_id=update.id
         )
 
-@Client.on_callback_query()
-async def button(bot, update):
 
-
-    if "|" in update.data:
-        await youtube_dl_call_back(bot, update)
-    elif "=" in update.data:
-        await ddl_call_back(bot, update)
-
-    else:
-        await update.message.delete()
