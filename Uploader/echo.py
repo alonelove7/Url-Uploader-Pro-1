@@ -27,7 +27,8 @@ from hachoir.parser import createParser
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import UserNotParticipant
 from Uploader.functions.ran_text import random_char
-
+from Uploader.dl_button import ddl_call_back
+from Uploader.button import youtube_dl_call_back
 
 from pyrogram.types import Thumbnail
 
