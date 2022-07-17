@@ -150,8 +150,7 @@ async def show_thumbnail(c, m):
 
 ################## THE END 🛑 ##################
 
-@Client.on_message(filters.photo)
-asy
+
 
 
 async def Gthumb01(bot, update):
