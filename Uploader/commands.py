@@ -15,17 +15,17 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, 
 from Uploader.config import Config
 from Uploader.script import Translation
 from pyrogram import Client, filters
-from Uploader.database.add import AddUser
+
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from Uploader.database.database import db
+
 from Uploader.functions.forcesub import handle_force_subscribe
-from Uploader.settings.settings import OpenSettings
+
 
 @Client.on_message(
     filters.command("start") & filters.private,
 )
 async def start_bot(_, m: Message):
-    await AddUser(_, m)
+    
     return await m.reply_text(
         Translation.START_TEXT.format(m.from_user.first_name),
         reply_markup=Translation.START_BUTTONS,
@@ -41,7 +41,7 @@ async def start_bot(_, m: Message):
     filters.command("about") & filters.private,
 )
 async def aboutme(_, m: Message):
-    await AddUser(_, m)
+    
     return await m.reply_text(
         Translation.ABOUT_TEXT,
         reply_markup=Translation.ABOUT_BUTTONS,
@@ -52,7 +52,7 @@ async def aboutme(_, m: Message):
     filters.private & filters.reply & filters.text
 )
 async def edit_caption(bot, update):
-    await AddUser(bot, update)
+    
     try:
         await bot.send_cached_media(
             chat_id=update.chat.id,
@@ -76,7 +76,7 @@ async def edit_caption(bot, update):
     filters.private & filters.command(["caption"])
 )
 async def add_caption_help(bot, update):
-    await AddUser(bot, update)
+   
     await bot.send_message(
         chat_id=update.chat.id,
         text=Translation.ADD_CAPTION_HELP,
@@ -104,7 +104,7 @@ async def info_handler(bot, update):
     filters.command("help") & filters.private,
 )
 async def help_bot(_, m: Message):
-    await AddUser(_, m)
+   
     return await m.reply_text(
         Translation.HELP_TEXT,
         reply_markup=Translation.HELP_BUTTONS,
