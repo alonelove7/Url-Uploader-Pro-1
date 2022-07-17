@@ -18,111 +18,101 @@ from pyrogram import Client, filters
 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from Uploader.functions.forcesub import handle_force_subscribe
+
+from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup 
 
 
-@Client.on_message(
-    filters.command("start") & filters.private,
-)
-async def start_bot(_, m: Message):
-    
-    return await m.reply_text(
-        Translation.START_TEXT.format(m.from_user.first_name),
-        reply_markup=Translation.START_BUTTONS,
-        disable_web_page_preview=True,
-        quote=True
-    )
+@Client.on_message(filters.command("help") & filters.private & filters.incoming)
+async def help(c, m, cb=False):
+    button = [[
+        InlineKeyboardButton('🏕️ Home', callback_data='back'),
+        InlineKeyboardButton('💸 Donate', callback_data='donate')
+        ],[
+        InlineKeyboardButton('❌ Close', callback_data='close')
+    ]]
+    reply_markup = InlineKeyboardMarkup(button)
 
-
-
-
-
-@Client.on_message(
-    filters.command("about") & filters.private,
-)
-async def aboutme(_, m: Message):
-    
-    return await m.reply_text(
-        Translation.ABOUT_TEXT,
-        reply_markup=Translation.ABOUT_BUTTONS,
-        disable_web_page_preview=True
-    )
-
-@Client.on_message(
-    filters.private & filters.reply & filters.text
-)
-async def edit_caption(bot, update):
-    
-    try:
-        await bot.send_cached_media(
-            chat_id=update.chat.id,
-            file_id=update.reply_to_message.video.file_id,
-            reply_to_message_id=update.id,
-            caption=update.text
-        )
-    except:
+    if cb:
         try:
-            await bot.send_cached_media(
-                chat_id=update.chat.id,
-                file_id=update.reply_to_message.document.file_id,
-                reply_to_message_id=update.id,
-                caption=update.text
+            await m.message.edit(
+                text=TEXT.HELP_USER.format(m.from_user.first_name),
+                disable_web_page_preview=True,
+                reply_markup=reply_markup
             )
         except:
             pass
-
-
-@Client.on_message(
-    filters.private & filters.command(["caption"])
-)
-async def add_caption_help(bot, update):
-   
-    await bot.send_message(
-        chat_id=update.chat.id,
-        text=Translation.ADD_CAPTION_HELP,
-        #parse_mode="html",
-        reply_to_message_id=update.id
-    )
-
-
-@Client.on_message(
-    filters.private & filters.command("me")
-)
-async def info_handler(bot, update):
-    if update.from_user.last_name:
-        last_name = update.from_user.last_name
     else:
-        last_name = "None" 
-    await update.reply_text(  
-        text=Translation.INFO_TEXT.format(update.from_user.first_name, last_name, update.from_user.username, update.from_user.id, update.from_user.mention, update.from_user.dc_id, update.from_user.language_code, update.from_user.status), 
-        reply_markup=Translation.BUTTONS,           
-        disable_web_page_preview=True
-    )
-
-
-@Client.on_message(
-    filters.command("help") & filters.private,
-)
-async def help_bot(_, m: Message):
-   
-    return await m.reply_text(
-        Translation.HELP_TEXT,
-        reply_markup=Translation.HELP_BUTTONS,
-        disable_web_page_preview=True
-    )
+        await m.reply_text(
+            text=TEXT.HELP_USER.format(m.from_user.first_name),
+            disable_web_page_preview=True,
+            reply_markup=reply_markup,
+            quote=True
+        )
 
 
 
+@Client.on_message(filters.command("start") & filters.private & filters.incoming)
+async def start(c, m, cb=False):
+    if not cb:
+        start = await m.reply_text("**Checking...**", quote=True)
+
+    button = [
+        [
+            InlineKeyboardButton('🧔 Developer', url='https://t.me/DKBOTZHELP'),
+            InlineKeyboardButton('📘 About', callback_data='about')
+        ],
+        [
+            InlineKeyboardButton('💡 Help', callback_data="help"),
+            InlineKeyboardButton('🛠 Settings', callback_data="setting")
+        ],
+        [
+            InlineKeyboardButton('❌ Close', callback_data="close")
+        ],
+    ]
+    reply_markup = InlineKeyboardMarkup(button)
+    if cb:
+        try:
+            await m.message.edit(
+                text=Translation.START_TEXT.format(m.from_user.first_name), 
+                disable_web_page_preview=True,
+                reply_markup=reply_markup
+            )
+        except:
+            pass
+    else:
+        await start.edit(
+            text=Translation.START_TEXT.format(m.from_user.first_name), 
+            disable_web_page_preview=True,
+            reply_markup=reply_markup
+        ) 
 
 
+@Client.on_message(filters.command("about") & filters.private & filters.incoming)
+async def about(c, m, cb=False):
+    restart_time = Config.RESTART_TIME[0]
+    time_format = restart_time.strftime("%d %B %Y %I:%M %p")
+    button = [[
+        InlineKeyboardButton('🏕️ Home', callback_data='back'),
+        InlineKeyboardButton('💸 Donate', callback_data='donate')
+        ],[
+        InlineKeyboardButton('❌ Close', callback_data='close')
+    ]]
+    reply_markup = InlineKeyboardMarkup(button)
+    if cb:
+        try:
+            await m.message.edit(
+                text=Translation.ABOUT_TEXT.format(time_format),
+                disable_web_page_preview=True,
+                reply_markup=reply_markup
+            )
+        except:
+            pass
+    else:
+        await m.reply_text(
+            text=Translation.ABOUT_TEXT.format(time_format),
+            disable_web_page_preview=True,
+            reply_markup=reply_markup,
+            quote=True
+        )
 
-@Client.on_message(
-    filters.command("plans") & filters.private,
-)
-async def plans(_, m: Message):
-    await AddUser(_, m)
-    return await m.reply_text(
-        Translation.PLANS,
-        reply_markup=Translation.BUTTONS,
-        disable_web_page_preview=True
-    )
