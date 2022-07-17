@@ -3,6 +3,7 @@ from Uploader.functions.display_progress import progress_for_pyrogram, humanbyte
 from Uploader.config import Config
 from Uploader.dl_button import ddl_call_back
 from Uploader.button import youtube_dl_call_back
+from Uploader.commands import help, start, about
 
 from Uploader.script import Translation, TEXT
 from pyrogram import Client, types
@@ -16,72 +17,20 @@ from Uploader.commands import *
 from Uploader.thumbnail import delete_thumbnail
 
 
-
-
-
-
-
-
-@Client.on_callback_query(filters.regex('^|$'))
-async def button(c, m):
-    
-    await youtube_dl_call_back(c, m, True)
-@Client.on_callback_query(filters.regex('^=$'))
-async def button(c, m):
-  
-    await ddl_call_back(c, m, True)
-
-
-@Client.on_callback_query(filters.regex('^help$'))
-async def help_cb(c, m):
-    await m.answer()
-    await help(c, m, True)
-
-
-@Client.on_callback_query(filters.regex('^donate$'))
-async def donate(c, m):
-    button = [[
-        InlineKeyboardButton('🏕️ Home', callback_data='back'),
-        InlineKeyboardButton('📘 About', callback_data='about')
-        ],[
-        InlineKeyboardButton('❌ Close', callback_data='close')
-    ]]
-    reply_markup = InlineKeyboardMarkup(button)
-    await m.answer()
-    await m.message.edit(
-        text=TEXT.DONATE_USER.format(m.from_user.first_name),
-        disable_web_page_preview=True,
-        reply_markup=reply_markup
-    )
-
-
-@Client.on_callback_query(filters.regex('^close$'))
-async def close_cb(c, m):
-    try:
-        await m.message.delete()
-        await m.message.reply_to_message.delete()
-    except:
-        pass
-
-
-@Client.on_callback_query(filters.regex('^back$'))
-async def back_cb(c, m):
-    await m.answer()
-    await start(c, m, True)
-
-@Client.on_callback_query(filters.regex('^about$'))
-async def about_cb(c, m):
-    await m.answer()
-    await about(c, m, True)
-
-
-
-
-
-@Client.on_callback_query(filters.regex('^del$'))
-async def deletethumb_cb(c, m):
-    await m.answer()
-    await delete_thumbnail(c, m.message.reply_to_message)
-    await m.message.delete
-
-
+@Client.on_callback_query()
+async def button(bot, update):
+      cb_data = update.data
+      if "|" in cb_data:
+          await youtube_dl_call_back(bot, update)
+      elif "=" in cb_data:
+          await ddl_call_back(bot, update)
+      elif cb_data == "help":
+          await help(bot, update, "False")
+      elif cb_data == "donate":
+          await donate(bot, update)
+      elif cb_data == "close":
+          await update.message.delete()
+      elif cb_data == "back":
+          await start(bot, update, "False")
+      elif cb_data == "about":
+          await about(bot, update, "False")
