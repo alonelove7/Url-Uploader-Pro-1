@@ -24,11 +24,11 @@ from Uploader.thumbnail import delete_thumbnail
 
 @Client.on_callback_query(filters.regex('^|$'))
 async def button(c, m):
-    await m.answer()
+    
     await youtube_dl_call_back(c, m, True)
 @Client.on_callback_query(filters.regex('^=$'))
 async def button(c, m):
-    await m.answer()
+  
     await ddl_call_back(c, m, True)
 
 
