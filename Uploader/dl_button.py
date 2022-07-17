@@ -15,13 +15,12 @@ from datetime import datetime
 from Uploader.config import Config
 from Uploader.script import Translation
 from Uploader.thumbnail import *
-from Uploader.database.database import db
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 from Uploader.functions.display_progress import progress_for_pyrogram, humanbytes, TimeFormatter
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from PIL import Image
-from pyrogram import enums 
+#from pyrogram import enums 
 
 
 
